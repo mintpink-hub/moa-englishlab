@@ -1,0 +1,476 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Moa English Lab ♡</title><style>
+:root{--bg:#f5f6f0;--paper:#fffefa;--green:#315e44;--olive:#739477;--ink:#203b2b;--muted:#738477;--line:#dfe7db;--soft:#edf4e9;--warm:#fff2e6}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 system-ui,'Segoe UI',sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}.shell{display:grid;grid-template-columns:230px 1fr;min-height:100vh}.side{background:#e9efe5;border-right:1px solid var(--line);padding:26px 16px}.brand{font-size:19px;font-weight:850;letter-spacing:-.7px;padding:8px 12px 28px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px}.nav{display:grid;gap:7px}.nav button{border:0;border-radius:12px;background:transparent;color:#526c59;padding:14px;text-align:left}.nav button.active,.nav button:hover{background:white;color:var(--green);font-weight:800}.main{max-width:1280px;width:100%;margin:0 auto;padding:35px clamp(16px,4vw,55px)}.page{display:none}.page.active{display:block}.eyebrow{font-size:11px;letter-spacing:2px;font-weight:850;color:var(--olive)}h1{font-size:clamp(25px,3vw,35px);line-height:1.25;letter-spacing:-1.2px;margin:8px 0}h2{font-size:19px;margin:0 0 14px}h3{font-size:16px;margin:0 0 8px}p{margin:7px 0;color:var(--muted)}.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px;margin:18px 0;box-shadow:0 13px 38px #1f3e2908}.hero{background:linear-gradient(120deg,#e0ecda,#f7f1df)}.field{display:block;width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:white;color:var(--ink);margin:8px 0 14px}textarea{min-height:180px;resize:vertical}.btn{border:0;border-radius:12px;padding:11px 16px;background:var(--green);color:white;font-weight:750}.btn.alt{background:white;color:var(--green);border:1px solid var(--line)}.btn.small{padding:7px 11px;font-size:12px}.actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.muted{font-size:12px;color:var(--muted)}.chapter-nav{display:flex;gap:8px;overflow:auto;padding:5px 0 10px}.chapter-nav button{white-space:nowrap;border:1px solid var(--line);border-radius:12px;background:white;padding:9px 14px;color:var(--green)}.chapter-nav button.active{background:var(--green);color:white}.chapter-top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.sentence{display:grid;grid-template-columns:40px 1fr;gap:10px;border-bottom:1px solid var(--line);padding:14px 0}.sentence:last-child{border:0}.sentence.selected{background:#eef5ec;border-radius:12px;padding-left:8px;padding-right:8px}.sentence-pick{display:flex;align-items:center;gap:8px;cursor:pointer}.sentence-check{width:20px;height:20px;accent-color:#315e44;cursor:pointer}.cut-options{display:flex;flex-wrap:wrap;align-items:center;gap:3px;margin:10px 0}.cut-options button{border:0;background:#e9f2e8;color:#315e44;border-radius:6px;padding:3px 5px;font-size:14px}.cut-options button:hover{background:#b9d6b9}.number{color:var(--olive);font-weight:850}.english{font-size:15px;font-weight:650}.korean{font-size:13px;color:#607869;margin-top:4px}.inline-exp{display:inline-block;font-size:12px;color:var(--green);background:var(--soft);padding:3px 9px;border-radius:9px;margin-top:6px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.tile{border:1px solid var(--line);background:white;border-radius:17px;padding:18px}.tile strong{font-size:17px;color:var(--green)}.tile p{font-size:13px}.tag{font-size:11px;font-weight:800;color:var(--olive);letter-spacing:1px}.practice{padding:18px;border:1px solid var(--line);border-radius:16px;margin:10px 0;background:white}.practice textarea{min-height:72px}.drill-panel{background:#f7faf5;border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:14px}.drill-question{font-size:21px;color:var(--ink);font-weight:750;margin:15px 0}.pills{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.pills button{background:white;color:var(--green);border:1px solid var(--line);border-radius:10px;padding:8px 12px}.pills button.active{background:var(--green);color:white}.progress{font-size:12px;color:var(--muted)}.answer{background:var(--soft);border-radius:10px;padding:12px;margin-top:10px;font-size:13px}.notice{background:var(--warm);padding:12px;border-radius:12px;font-size:13px;color:#815b3c}.status{color:#52725c;font-size:13px;margin:10px 0;white-space:pre-wrap}.note{border-bottom:1px solid var(--line);padding:15px 0}.note:last-child{border:0}.note strong{color:var(--green)}.note p{font-size:13px}.count{font-size:12px;color:var(--muted)}.hidden{display:none!important}@media(max-width:780px){.shell{display:block}.side{position:sticky;top:0;z-index:3;padding:8px 10px;display:flex;align-items:center;gap:10px}.brand{font-size:14px;padding:0}.brand small{display:none}.nav{display:flex;overflow:auto;gap:3px}.nav button{font-size:12px;padding:9px;white-space:nowrap}.main{padding:20px 13px}.card{padding:17px}.sentence{grid-template-columns:30px 1fr}}
+
+
+/* V37: pattern practice only — grouped tense selection */
+#pattern-app .tense-groups{display:block!important;margin:14px 0 20px!important}
+#pattern-app .tense-all{margin-bottom:12px}
+#pattern-app .tense-all button{border:1px solid var(--line);background:#fff;color:var(--green);padding:11px 16px;border-radius:10px}
+#pattern-app .tense-all button.active{background:var(--green);color:#fff}
+#pattern-app .tense-section{padding:14px 0;border-top:1px solid var(--line)}
+#pattern-app .tense-section h4{font-size:15px;margin:0 0 12px;color:var(--green);font-weight:800}
+#pattern-app .tense-section h4 small{font-size:11px;font-weight:400;color:var(--muted);margin-left:8px}
+#pattern-app .tense-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+#pattern-app .tense-grid button{min-width:0;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px 6px;border-radius:12px;border:1px solid var(--line);background:white;color:var(--green);line-height:1.35;overflow-wrap:anywhere}
+#pattern-app .tense-grid button small{font-size:11px;opacity:.75}
+#pattern-app .tense-grid button.active{background:var(--green);color:white}
+#pattern-app .tense-grid button:disabled{opacity:.38;cursor:not-allowed}
+@media(max-width:700px){#pattern-app .tense-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.chapter-search{margin:16px 0;padding:16px;border:1px solid var(--line);border-radius:16px;background:#f7faf5}.chapter-search-hit{padding:12px;margin:9px 0;background:white;border:1px solid var(--line);border-radius:12px}.search-highlight{background:#fff0bc!important;outline:2px solid #d5ac46;border-radius:12px;scroll-margin-top:110px}.sentence-toolbar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:9px}.sentence-toolbar .actions{gap:6px}.sentence-main-actions{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:10px}.sentence-main-actions .btn{white-space:normal}.sentence-practice{background:var(--green)}.sentence-practice-slot{display:inline-flex;gap:6px;flex-wrap:wrap}.practice-return{margin:0 0 14px;padding:12px 14px;background:#edf4e9;border:1px solid var(--line);border-radius:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}.sentence-content{min-width:0}@media(max-width:550px){.sentence-toolbar{align-items:flex-start}.sentence-toolbar .btn{padding:5px 8px}.sentence-main-actions .btn{font-size:11px}}
+</style><style>
+#pattern-app .pat-list{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px!important;margin-top:14px}
+#pattern-app .pat-option{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:space-between!important;gap:9px!important;min-height:94px!important;padding:15px!important;border:1px solid #d8e3d9!important;border-radius:12px!important;background:#fff!important;white-space:normal!important;text-align:left!important;line-height:1.5!important;cursor:pointer}
+#pattern-app .pat-option.selected{background:#eaf3ec!important;border:2px solid #2e5b46!important}
+#pattern-app .pat-option span{display:flex!important;flex-direction:column!important;gap:5px!important}
+#pattern-app .pat-option b{font-size:15px!important;white-space:normal!important}
+#pattern-app .pat-option small{display:block!important;font-size:12px!important;color:#60736a!important;white-space:normal!important}
+#pattern-app .pills{display:flex!important;flex-wrap:wrap!important;gap:8px!important;margin:12px 0 18px!important}
+#pattern-app .pills button{border:1px solid #d8e3d9!important;border-radius:10px!important;padding:10px 13px!important;line-height:1.4!important;background:#fff!important;white-space:normal!important}
+#pattern-app .pills button.active{background:#2d5b45!important;color:white!important}
+#pattern-app #pat-tenses{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(110px,1fr))!important}
+#pattern-app #pat-tenses button{display:flex!important;flex-direction:column!important;align-items:center!important;gap:4px!important}
+#pattern-app #pat-tenses small{font-size:11px;opacity:.7}
+#pattern-app .drill-panel{border-radius:15px!important;padding:18px!important}
+</style><style id="v20-polish">
+#pattern-app .pat-list{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(235px,1fr))!important;gap:10px!important;margin-top:14px!important}
+#pattern-app .pat-option{display:flex!important;align-items:flex-start!important;justify-content:space-between!important;text-align:left!important;white-space:normal!important;min-height:88px!important;border:1px solid #dce5d9!important;border-radius:14px!important;background:#fff!important;padding:13px!important;gap:10px!important;line-height:1.4!important;box-sizing:border-box!important}
+#pattern-app .pat-option.selected{background:#e7f0e6!important;border:2px solid #2f604c!important}
+#pattern-app .pat-option span{display:flex!important;flex-direction:column!important;gap:5px!important;min-width:0!important}
+#pattern-app .pat-option b{font-size:14px!important;overflow-wrap:anywhere!important}
+#pattern-app .pat-option small{display:block!important;font-size:12px!important;color:#64746c!important;white-space:normal!important}
+#pattern-app #pat-groups{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+#pattern-app #pat-tenses{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(105px,1fr))!important;gap:8px!important}
+#pattern-app #pat-tenses button{white-space:normal!important;min-height:49px!important}
+#pattern-app .drill-question{line-height:1.6!important;font-size:clamp(18px,2vw,24px)!important}
+@media(max-width:600px){#pattern-app .pat-list{grid-template-columns:1fr!important}}
+#pattern-app .pat-alphabet{display:flex;flex-wrap:wrap;gap:4px;margin:12px 0 10px}#pattern-app .pat-alphabet button{border:0;border-radius:7px;background:transparent;color:#476452;padding:8px 10px;min-width:32px;cursor:pointer;font-weight:650}#pattern-app .pat-alphabet button.active{background:#2d5b45;color:white}#pattern-app #pat-groups{padding:12px;background:#f5f8f5;border-radius:12px;margin:0 0 14px!important}#pattern-app #pat-groups button{padding:9px 15px!important}@media(max-width:600px){#pattern-app .pat-alphabet button{min-width:28px;padding:7px 8px}}
+</style><style id="v55-tense-layout">
+/* V55: visual-only redesign; existing data, selectors and click handlers unchanged */
+#pattern-app #pat-tenses.tense-groups{display:block!important;margin:10px 0 16px!important}
+#pattern-app .tense-all{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 13px!important}
+#pattern-app .tense-label{font-size:13px;font-weight:650;color:#667c6c}
+#pattern-app .tense-all button{display:inline-flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:9px!important;min-height:42px!important;padding:9px 16px!important;border-radius:11px!important;font-weight:700!important;white-space:nowrap!important}
+#pattern-app .tense-all button small{font-size:11px!important;opacity:.8}
+#pattern-app .tense-columns{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+#pattern-app .tense-columns .tense-section{min-width:0!important;border:1px solid #dce6dc!important;border-radius:14px!important;background:#f2f6f0!important;padding:13px!important}
+#pattern-app .tense-columns .tense-section h4{display:flex!important;justify-content:space-between!important;align-items:center!important;margin:0 0 10px!important;padding:0 2px!important;font-size:15px!important}
+#pattern-app .tense-columns .tense-section h4 small{font-size:11px!important;font-weight:500!important}
+#pattern-app .tense-columns .tense-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:7px!important}
+#pattern-app .tense-columns .tense-grid button{display:flex!important;flex-direction:row!important;justify-content:space-between!important;align-items:center!important;gap:8px!important;width:100%!important;min-width:0!important;min-height:43px!important;padding:9px 12px!important;border-radius:10px!important;overflow-wrap:normal!important;white-space:nowrap!important;text-align:left!important;font-size:13px!important;line-height:1.35!important}
+#pattern-app .tense-columns .tense-grid button span{min-width:0!important;white-space:nowrap!important}
+#pattern-app .tense-columns .tense-grid button small{flex-shrink:0!important;white-space:nowrap!important}
+#pattern-app .tense-columns .tense-grid button.active{background:#315e44!important;color:white!important;border-color:#315e44!important}
+#pattern-app .tense-columns .tense-grid button:disabled{opacity:.43!important;cursor:not-allowed!important}
+#pattern-app #pat-tenses>.tense-section{margin-top:13px!important;padding:12px 14px!important;border:1px solid #dce6dc!important;border-radius:12px!important;background:#f7faf5!important}
+#pattern-app #pat-tenses>.tense-section .tense-grid{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+#pattern-app #pat-tenses>.tense-section .tense-grid button{min-height:42px!important;min-width:120px!important;flex-direction:row!important;gap:9px!important;padding:8px 12px!important}
+@media(max-width:900px){#pattern-app .tense-columns{grid-template-columns:1fr!important;gap:9px!important}#pattern-app .tense-columns .tense-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}#pattern-app .tense-columns .tense-grid button{white-space:normal!important}#pattern-app .tense-columns .tense-grid button span{white-space:normal!important}}
+@media(max-width:500px){#pattern-app .tense-all{align-items:flex-start!important;flex-wrap:wrap!important}#pattern-app .tense-columns .tense-grid{grid-template-columns:1fr!important}}
+
+/* Moa English Lab: pastel rose theme, original learning behavior preserved */
+:root{--bg:#fff9fb;--paper:#ffffff;--green:#b85680;--olive:#d8799c;--ink:#493c43;--muted:#927b86;--line:#f0d4df;--soft:#fff0f5;--warm:#fff0f5}
+body{background:var(--bg);color:var(--ink)}
+.side{background:#fff0f5;border-color:var(--line)}
+.brand{color:#b85680}.brand small{color:#bd819a}
+.nav button{color:#9e6580}.nav button.active,.nav button:hover{background:#fff;color:#b85680}
+.eyebrow,.tag,.number{color:#c66c91}
+.card{background:#fff;border-color:#f0d4df;box-shadow:0 9px 28px #b45b8210}
+.hero{background:linear-gradient(125deg,#ffe1ed,#fff7fa 65%,#fff1f6)}
+.btn,.chapter-nav button.active,.pills button.active{background:#d8799c;color:#fff}
+.btn.alt{background:#fff;color:#b85680;border-color:#edc3d3}
+.field{border-color:#edc3d3;background:#fff;color:#493c43}
+.field:focus-visible,.btn:focus-visible,.nav button:focus-visible{outline:2px solid #d8799c;outline-offset:2px}
+.chapter-nav button,.pills button{color:#b85680;border-color:#f0d4df}
+.sentence.selected,.inline-exp,.answer,.practice-return{background:#fff0f5}
+.sentence-check{accent-color:#d8799c}
+.cut-options button{background:#ffe3ee;color:#b85680}.cut-options button:hover{background:#f8c6d9}
+.korean,.status{color:#9b6d83}.tile strong,.note strong{color:#b85680}
+.drill-panel,.chapter-search,#pattern-app #pat-groups,#pattern-app .tense-columns .tense-section,#pattern-app #pat-tenses>.tense-section{background:#fff6fa!important;border-color:#f0d4df!important}
+#pattern-app .pat-option,#pattern-app .pills button{border-color:#edc3d3!important}
+#pattern-app .pat-option.selected{background:#ffe6f0!important;border-color:#d8799c!important}
+#pattern-app .pills button.active,#pattern-app .tense-columns .tense-grid button.active,#pattern-app .pat-alphabet button.active{background:#d8799c!important;color:#fff!important;border-color:#d8799c!important}
+#pattern-app .pat-alphabet button{color:#b85680}
+.notice{background:#fff0f5;color:#87516c}
+</style></head><body><div class="shell"><aside class="side"><div class="brand">✿ Moa English Lab ♡<small>MY LOVELY ENGLISH SPACE</small></div><nav class="nav"><button data-page="study" class="active">📖 영상 학습</button><button data-page="notes">🔖 내 문장 노트</button><button data-page="patterns">📚 영어 패턴 연습장</button></nav></aside><main class="main">
+<section id="study" class="page active"><div class="eyebrow">VIDEO TO PERSONAL TEXTBOOK</div><h1>영상 한 편, 나만의 영어 교재</h1><p>영상 전체 자막을 최대 20개 챕터로 나누어 표시 · 영어 원문은 즉시 표시 · Google 번역에서 확인한 뜻을 한 번 저장하면 계속 재사용해요. 유료 API 연결 없음.</p><div class="card hero"><h2>01 · 자막 준비</h2><label>유튜브 주소</label><input class="field" id="url" placeholder="https://www.youtube.com/watch?v=..."><div class="actions"><button class="btn" id="fetch">자막 가져오기</button><span class="muted">영어 자막이 제공되는 영상만 자동 가져오기가 가능해요.</span></div><label style="display:block;margin-top:15px">레슨 제목</label><input class="field" id="title" value="My English Vlog"><label>영상 전체 스크립트 (유튜브 원문 그대로)</label><div class="actions"><button class="btn alt small" id="show-readable" type="button">전체 스크립트 보기</button><button class="btn alt small" id="show-raw" type="button">유튜브 원본 자막 조각 보기</button><button class="btn alt small" id="download-raw" type="button">원본 자막 백업</button></div><textarea class="field" id="script" wrap="soft" style="white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:hidden;min-height:220px" placeholder="자막을 가져오거나 YouTube 스크립트 전체를 직접 붙여넣어 주세요."></textarea><div class="actions"><button class="btn" id="build">전체 자막으로 챕터 만들기</button><button class="btn alt" id="sample">짧은 예시로 체험</button></div><div class="status" id="fetch-status"></div></div><div id="lesson" class="hidden"><div class="card"><div class="chapter-top"><div><div class="eyebrow">02 · CHAPTER STUDY</div><h2 id="chapter-heading"></h2><p id="chapter-summary"></p></div><div class="actions"><button class="btn alt small" id="prev">← 이전</button><button class="btn alt small" id="next">다음 →</button></div></div><div class="chapter-nav" id="chapter-nav"></div><div class="actions"><span class="muted">「Google 번역 열기」에서 결과를 복사해 「번역 붙여넣기」로 저장해요. 공식 무료 웹사이트를 열며 자동 API 호출은 하지 않아요. 표현은 직접 선택해서 저장할 수 있어요.</span></div><div class="status" id="analysis-status"></div><div class="status" id="translation-status"></div><div class="actions" style="margin:12px 0"><button class="btn small" id="merge-selected">선택한 문장 모두 합치기</button><button class="btn alt small" id="undo-edit">↶ 실행 취소</button><button class="btn alt small" id="clear-selection">선택 해제</button><span class="muted" id="edit-count">0개 선택 · 편집 즉시 자동 저장</span></div><div class="chapter-search" id="chapter-search"><div class="tag">1~20장 · 영어 문장 통합 검색</div><input class="field" id="chapter-search-input" type="search" placeholder="전체 챕터에서 표현 검색 (예: put together)"><div class="actions" style="margin:0 0 8px"><label class="muted"><input type="radio" name="chapter-search-scope" value="all" checked> 전체 챕터</label><label class="muted"><input type="radio" name="chapter-search-scope" value="current"> 현재 장만</label><button class="btn alt small" id="chapter-search-clear" type="button">검색 초기화</button></div><div id="chapter-search-results" aria-live="polite"></div></div><div id="sentences"></div></div></div></section>
+<section id="practice" class="page"><div class="eyebrow">PRACTICE WHAT MATTERS</div><h1>저장 문장 · 패턴 반복 연습</h1><p>저장한 문장을 듣고 따라 말한 다음, 연결된 검토 패턴으로 연습해요. 지원하지 않는 문장은 패턴을 직접 선택할 수 있어요.</p><div class="card"><div class="chapter-top"><h2 id="practice-heading">저장한 문장으로 연습하기</h2><button class="btn alt" id="go-study">영상 학습으로</button></div><div id="practice-list"></div><p class="muted">🎙 마이크는 Edge/Chrome에서 권한 허용이 필요해요. 브라우저 음성 인식은 기기에 따라 온라인 서비스를 사용할 수 있어요.</p></div></section>
+<section id="notes" class="page"><div class="eyebrow">MY SENTENCE ARCHIVE</div><h1>내 문장 노트 <span id="note-count" class="count"></span></h1><p>영어 원문을 저장하고 검색하세요. 뜻은 Google 번역에서 확인하고, 등록된 패턴은 바로 연습할 수 있어요.</p><div class="card"><input id="note-search" class="field" placeholder="저장한 영어 문장 또는 표현 검색"><div id="note-list"></div></div><div class="card"><h2>직접 문장 추가</h2><input id="manual-en" class="field" placeholder="영어 문장"><button class="btn" id="manual-save">내 노트에 저장</button><div class="actions" style="margin-top:16px"><button class="btn alt small" id="backup">노트 백업 다운로드</button></div></div></section>
+<section id="patterns" class="page"><div class="eyebrow">PATTERN PRACTICE LIBRARY</div><h1>영어 패턴 연습장</h1><p>동사 → 세부 패턴 → 시제 → 평서문·부정문·의문문. 확인된 영상 원문을 바탕으로 연습해요. 새 영상의 표현도 직접 추가할 수 있어요.</p><div class="card"><div id="pattern-app">패턴 목록 불러오는 중…</div></div></section><section id="tenses" class="page"><div class="eyebrow">SOURCE-VERIFIED GRAMMAR</div><h1>영상 시제·문법 연습</h1><p>업로드한 실제 영어 원문에서 일치 여부를 확인한 문장으로만 연습해요. 이 연습 데이터는 원본 자막이나 챕터를 변경하지 않습니다.</p><div class="card"><label for="tense-filter">연습할 문법</label><select id="tense-filter" class="field"><option value="all">전체 문법</option></select><div class="actions"><button class="btn alt small" id="tense-shuffle">문제 순서 섞기</button><button class="btn alt small" id="tense-reset">처음부터</button></div><div id="tense-practice">문제 불러오는 중…</div></div></section></main></div><script>
+'use strict';
+const $=id=>document.getElementById(id);
+(location.hostname.endsWith('github.io')?Promise.resolve({json:()=>Promise.resolve({version:'V43'})}):fetch('/api/version',{cache:'no-store'})).then(r=>r.json()).then(d=>{if(d.version!=='V43')alert('이전 서버가 실행 중입니다 ('+d.version+'). 기존 검은 창을 닫고 V43을 실행하세요.');}).catch(()=>{});const KEY='oliveV5';const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function load(k,fallback){try{return JSON.parse(localStorage.getItem(k)||'null')??fallback}catch{return fallback}}
+const state=load(KEY,{notes:[],lesson:null,chapter:0});if(!Array.isArray(state.notes))state.notes=[];
+// Re-group old V5 lessons that had more than 20 chapters; preserve saved notes.
+if(state.lesson?.chapters?.length>20){const old=state.lesson,all=old.chapters.flatMap(c=>c.sentences||[]),size=Math.ceil(all.length/20),chapters=[];for(let i=0;i<all.length;i+=size)chapters.push({sentences:all.slice(i,i+size),translations:[],expressions:[],exercises:[],status:'new'});state.lesson={title:old.title,chapters,chapterSize:size,createdAt:new Date().toISOString()};state.chapter=0;}
+
+// One-time, non-destructive migration from earlier Olive versions.
+if(!state.migrated){const old=load('oliveLabV2',{});for(const n of [...(old.notes||[]),...load('oliveNotes',[])]){const en=String(n.en||'').trim();if(en&&!state.notes.some(x=>x.en.toLowerCase()===en.toLowerCase()))state.notes.push({id:String(n.id||Date.now()+Math.random()),en,ko:String(n.ko||''),source:n.source||'기존 노트',createdAt:n.createdAt||new Date().toISOString()})}state.migrated=true;}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){alert('저장 공간이 부족해요. 노트를 백업해 주세요.')}}
+persist();function page(p){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===p));document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===p));if(p==='notes')renderNotes();if(p==='practice')renderPractice();if(p==='patterns'&&window.patternRender)window.patternRender();window.scrollTo({top:0,behavior:'smooth'})}document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>page(b.dataset.page));
+// V27: caption lines are NOT sentence boundaries. Offline grammar-aware grouping.
+// Unpunctuated speech is inherently ambiguous: prefer keeping a long complete clause
+// over cutting a subject, auxiliary, verb, or object in half.
+function sentencesOf(raw){
+ // V34: The source script is read-only. Only split a temporary copy for chapters.
+ const clean=String(raw||'').replace(/\r?\n/g,' ').replace(/\s+/g,' ').trim();
+ if(!clean)return [];
+ // Protect abbreviations and clock notation such as 10:00 p.m.?
+ const DOT='\uE000';
+ const protectedText=clean
+   .replace(/\b([ap])\.m\./gi, m=>m.replace(/\./g,DOT))
+   .replace(/\b(?:Mr|Mrs|Ms|Dr|Prof|Sr|Jr|St|vs|etc)\./gi,m=>m.replace(/\./g,DOT))
+   .replace(/(\d)\.(?=\d)/g,'$1'+DOT);
+ const parts=protectedText.match(/[^.!?]+(?:[.!?]+(?=\s|$)|$)/g)||[];
+ return parts.map(t=>t.replaceAll(DOT,'.').trim()).filter(Boolean);
+}
+
+// Dynamic chapter size guarantees at most 20 chapters. Translation is independent of study analysis.
+function buildLesson(raw,title){const all=sentencesOf(raw);if(!all.length){alert('문장을 찾지 못했어요. 영어 스크립트를 입력해 주세요.');return}const size=Math.max(6,Math.ceil(all.length/20)),chapters=[];for(let i=0;i<all.length;i+=size)chapters.push({sentences:all.slice(i,i+size),translations:[],expressions:[],exercises:[],status:'new'});state.lesson={title,chapters,chapterSize:size,rawScript:raw,sourceRawScript:(window.oliveRawScript||raw),rawCaptions:(window.oliveRawCaptions||[]),createdAt:new Date().toISOString()};state.chapter=0;persist();renderLesson();$('lesson').classList.remove('hidden');$('lesson').scrollIntoView({behavior:'smooth'});}
+// Hidden legacy re-split command: no longer shown in the chapter interface.
+const resplitButton=document.getElementById('resplit-lesson');
+if(resplitButton)resplitButton.onclick=()=>{
+ if(!state.lesson)return;
+ const old=state.lesson;
+ const raw=old.rawScript||old.sourceRawScript||old.chapters.flatMap(c=>c.sentences||[]).join('\n');
+ if(!confirm('현재 레슨의 자막을 더 자연스러운 문장 단위로 다시 정리할까요? 문장 노트는 유지되지만, 기존 챕터별 번역 연결은 초기화됩니다. 먼저 아래 확인을 누르면 레슨 백업 파일이 자동 다운로드됩니다.'))return;
+ const backup=new Blob([JSON.stringify({lesson:old,notes:state.notes,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});const link=document.createElement('a');link.href=URL.createObjectURL(backup);link.download='olive-lesson-before-resplit.json';link.click();setTimeout(()=>URL.revokeObjectURL(link.href),2000);buildLesson(raw,old.title||'My lesson');
+};
+$('build').onclick=()=>buildLesson($('script').value,$('title').value||'My lesson');$('sample').onclick=()=>{$('title').value='A Catch-up Vlog';$('script').value="It has been a hot minute since I've seen you guys in a vlog. I miss you guys so much. It feels like a reunion I've been waiting for. I just came back from Spain a couple of days ago. I'm going to spill all the tea later in the vlog. We have so much to catch up on. I completely quit coffee last month. I started drinking coffee again during my trip.";buildLesson($('script').value,$('title').value)};
+$('fetch').onclick=async()=>{if(location.hostname.endsWith('github.io')){$('fetch-status').textContent='GitHub Pages는 Python 자막 추출 서버를 실행하지 못해요. 현재는 아래 스크립트 칸에 유튜브 자막을 복사해 붙여넣으면 무료로 학습할 수 있어요.';return}const b=$('fetch');b.disabled=true;$('fetch-status').textContent='자막 가져오는 중...';try{const r=await fetch('/api/transcript',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:$('url').value})});const d=await r.json();if(!r.ok)throw Error(d.detail||'자막 오류');window.oliveRawCaptions=d.rawCaptions||[];window.oliveRawScript=window.oliveRawCaptions.map(x=>x.text).join('\n')||d.script;window.oliveReadableScript=String(d.script||'');$('script').value=window.oliveReadableScript;$('title').value='YouTube · '+d.videoId;$('fetch-status').textContent='유튜브 자막 '+(d.captionCount||'')+'개를 가져왔어요. 유튜브 전체 스크립트를 가져왔습니다. 아래 문장 목록만 편집할 수 있습니다. 원본 보기 버튼으로 언제든 확인할 수 있어요.'}catch(e){$('fetch-status').textContent=e.message+'\n직접 가져오기: YouTube 영상에서 더보기 → 스크립트 표시 → 전체 텍스트 복사 → 아래 스크립트 칸에 붙여넣기.'}finally{b.disabled=false}};
+$('show-readable').onclick=()=>{if(window.oliveReadableScript)$('script').value=window.oliveReadableScript};
+$('show-raw').onclick=()=>{if(window.oliveRawScript!==undefined)$('script').value=window.oliveRawScript};
+$('download-raw').onclick=()=>{if(!window.oliveRawCaptions?.length){alert('먼저 자막을 가져와 주세요.');return}const blob=new Blob([JSON.stringify({captions:window.oliveRawCaptions,rawScript:window.oliveRawScript},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='olive-youtube-original-captions.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)};
+function chapter(){return state.lesson?.chapters[state.chapter]};function chapterBase(i){return state.lesson.chapters.slice(0,i).reduce((sum,c)=>sum+c.sentences.length,0)};function saveNote(en,ko,source){en=String(en||'').trim();if(!en)return false;if(state.notes.some(n=>n.en.toLowerCase()===en.toLowerCase())){alert('이미 노트에 저장된 표현이에요.');return false}state.notes.unshift({id:String(Date.now())+Math.random(),en,ko:'',source,createdAt:new Date().toISOString()});persist();renderNotes();return true}
+let editSelection=new Set(),editHistory=[],cutOpen=-1;
+function snapshotEdit(){editHistory.push(JSON.stringify(state.lesson));if(editHistory.length>30)editHistory.shift()}
+function editDone(){persist();editSelection.clear();cutOpen=-1;renderLesson()}
+function mergedText(parts){return parts.join(' ').replace(/\b([ap])\.\s+([m])\./gi,'$1.$2.').replace(/\s+([,;:!?])/g,'$1')}
+// V46: read-only cross-chapter search. Existing chapter and note data are not changed.
+let chapterSearchTerm='',chapterSearchScope='all',chapterSearchTarget=null;
+// V52: in-memory navigation bookmark, without altering lesson, notes or pattern data.
+let v52Return=null;
+function v52GoPractice(id,location){
+ if(!id)return;
+ v52Return={chapter:state.chapter,location,scrollY:window.scrollY,term:chapterSearchTerm,scope:chapterSearchScope};
+ page('patterns');
+ if(!window.oliveOpenPattern?.(id)){v52Return=null;return}
+ v52RenderReturn();
+}
+function v52RenderReturn(){
+ const app=document.getElementById('pattern-app');if(!app)return;
+ let panel=document.getElementById('v52-return');
+ if(!v52Return){panel?.remove();return}
+ if(!panel){panel=document.createElement('div');panel.id='v52-return';panel.className='practice-return';app.prepend(panel)}
+ panel.innerHTML='<strong>영상 학습에서 연습 중</strong><button class="btn small" type="button" id="v52-back">← 원래 문장으로 돌아가기</button>';
+ document.getElementById('v52-back').onclick=()=>{
+  const bookmark=v52Return;v52Return=null;v52RenderReturn();
+  state.chapter=bookmark.chapter;chapterSearchTerm=bookmark.term;chapterSearchScope=bookmark.scope;
+  page('study');renderLesson();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+   let row=null;
+   if(bookmark.location?.kind==='sentence')row=document.querySelectorAll('#sentences .sentence')[bookmark.location.index];
+   else if(bookmark.location?.kind==='search')row=document.querySelectorAll('#chapter-search-results .chapter-search-hit')[bookmark.location.index];
+   if(row){row.classList.add('search-highlight');row.scrollIntoView({behavior:'instant',block:'center'})}
+   else window.scrollTo({top:bookmark.scrollY,behavior:'instant'});
+  }));
+ };
+}
+
+function renderChapterSearch(){
+ const input=$('chapter-search-input'),out=$('chapter-search-results');if(!input||!out)return;
+ if(input.value!==chapterSearchTerm)input.value=chapterSearchTerm;
+ document.querySelectorAll('input[name="chapter-search-scope"]').forEach(r=>r.checked=r.value===chapterSearchScope);
+ const term=chapterSearchTerm.trim().toLocaleLowerCase();
+ if(!term){out.innerHTML='';return}
+ const found=[];
+ (state.lesson?.chapters||[]).forEach((c,ci)=>{if(chapterSearchScope==='current'&&ci!==state.chapter)return;(c.sentences||[]).forEach((en,si)=>{if(String(en).toLocaleLowerCase().includes(term))found.push({ci,si,en,ko:(c.translations||[]).find(t=>t.index===si+1)?.ko||''})})});
+ out.innerHTML='<p class="muted">검색 결과 '+found.length+'개 · '+(chapterSearchScope==='all'?'전체 챕터':'현재 장')+'</p>'+(found.length?found.map((x,i)=>'<div class="chapter-search-hit"><div class="tag">'+(x.ci+1)+'장 · '+(x.si+1)+'번째 문장</div><div class="english">'+esc(x.en)+'</div>'+(x.ko?'<div class="korean">'+esc(x.ko)+'</div>':'<div class="muted">번역 미등록</div>')+'<div class="actions" style="margin-top:8px"><button type="button" class="btn alt small" data-search-jump="'+i+'">문장으로 이동</button><button type="button" class="btn small" data-search-practice="'+i+'" disabled>연습문제 확인 중</button></div></div>').join(''):'<p class="muted">일치하는 영어 문장이 없어요.</p>');
+ out.querySelectorAll('[data-search-jump]').forEach(b=>b.onclick=()=>{const x=found[+b.dataset.searchJump];chapterSearchTarget=x.si;state.chapter=x.ci;editSelection.clear();cutOpen=-1;persist();renderLesson();const row=$('sentences').querySelectorAll('.sentence')[x.si];if(row){row.classList.add('search-highlight');row.scrollIntoView({behavior:'smooth',block:'center'})}});
+ out.querySelectorAll('[data-search-practice]').forEach(b=>{const x=found[+b.dataset.searchPractice];const match=window.oliveFindPatternForSentence?.(x.en,chapterSearchTerm);b.disabled=!match;b.textContent=match?'연습하러 가기':'연습문제 없음';if(match)b.onclick=()=>v52GoPractice(match.id,{kind:'search',index:+b.dataset.searchPractice})});
+}
+$('chapter-search-input').addEventListener('input',e=>{chapterSearchTerm=e.target.value;renderChapterSearch()});
+document.querySelectorAll('input[name="chapter-search-scope"]').forEach(r=>r.addEventListener('change',()=>{chapterSearchScope=r.value;renderChapterSearch()}));
+$('chapter-search-clear').onclick=()=>{chapterSearchTerm='';$('chapter-search-input').value='';renderChapterSearch()};
+window.addEventListener('olive-patterns-ready',()=>{renderChapterSearch();renderNotes();if(state.lesson)renderLesson()});
+function renderLesson(){
+ if(!state.lesson)return;
+ const l=state.lesson,c=chapter(),base=chapterBase(state.chapter);
+ $('lesson').classList.remove('hidden');
+ $('chapter-heading').textContent=l.title+' · 챕터 '+(state.chapter+1);
+ $('chapter-summary').textContent='전체 '+l.chapters.length+'챕터 · 문장 '+(base+1)+'~'+(base+c.sentences.length)+' · 자동 자막은 완전한 문장이 아닐 수 있어요';
+ $('chapter-nav').innerHTML=l.chapters.map((x,i)=>'<button class="'+(i===state.chapter?'active':'')+'" data-ch="'+i+'">'+(i+1)+'장</button>').join('');
+ document.querySelectorAll('[data-ch]').forEach(b=>b.onclick=()=>{state.chapter=+b.dataset.ch;editSelection.clear();cutOpen=-1;persist();renderLesson()});
+ $('prev').disabled=state.chapter===0;$('next').disabled=state.chapter===l.chapters.length-1;
+ renderChapterSearch();
+ $('analysis-status').textContent='영어 문장은 즉시 표시돼요. 필요한 문장만 번역하거나 저장하세요.';
+ const trans=new Map(c.translations.map(x=>[x.index,x.ko]));
+ $('edit-count').textContent=editSelection.size+'개 선택 · 편집 즉시 자동 저장';$('undo-edit').disabled=!editHistory.length;
+ $('sentences').innerHTML=c.sentences.map((en,i)=>{
+ const saved=state.notes.some(n=>n.en.toLowerCase()===en.toLowerCase());
+ const tools='<button class="btn alt small" data-cut="'+i+'">✂ 문장 나누기</button><button class="btn alt small" data-save-sentence="'+i+'" '+(saved?'disabled':'')+'>'+(saved?'저장됨 ✓':'이 문장 저장')+'</button>';
+ return '<div class="sentence '+(editSelection.has(i)?'selected':'')+'"><div class="number">'+String(base+i+1).padStart(2,'0')+'</div><div class="sentence-content"><div class="sentence-toolbar"><span class="tag">문장 '+(base+i+1)+'</span><div class="actions">'+tools+'</div></div><label class="sentence-pick"><input class="sentence-check" type="checkbox" data-pick="'+i+'" '+(editSelection.has(i)?'checked':'')+'><span class="english">'+esc(en)+'</span></label><div class="english"><button class="btn alt small" style="float:right;margin-left:12px" data-speak-line="'+i+'" title="이 문장만 듣기">🔊 듣기</button></div><div class="korean" id="translation-'+i+'">'+(trans.has(i+1)?esc(trans.get(i+1)):'')+'</div><div class="sentence-main-actions"><button class="btn alt small" data-one-translate="'+i+'">🌐 Google 번역 열기</button><button class="btn alt small" data-edit-translation="'+i+'">📋 번역 붙여넣기 / 수정</button><span class="sentence-practice-slot" data-practice-slot="'+i+'"></span></div></div></div>' ;
+ }).join('');
+ if(chapterSearchTarget!==null){const row=$('sentences').querySelectorAll('.sentence')[chapterSearchTarget];if(row)row.classList.add('search-highlight');chapterSearchTarget=null}
+ // Only show practice controls for patterns with registered exercises.
+ document.querySelectorAll('[data-practice-slot]').forEach(slot=>{
+  const i=+slot.dataset.practiceSlot;const matches=window.oliveFindAllPatternsForSentence?.(c.sentences[i])||[];
+  matches.forEach(match=>{const b=document.createElement('button');b.className='btn small sentence-practice';b.textContent=match.name+' 연습하기';b.onclick=()=>v52GoPractice(match.id,{kind:'sentence',index:i});slot.appendChild(b)});
+ });
+ document.querySelectorAll('[data-pick]').forEach(b=>b.onchange=()=>{const i=+b.dataset.pick;if(b.checked)editSelection.add(i);else editSelection.delete(i);renderLesson()});
+ document.querySelectorAll('[data-cut]').forEach(b=>b.onclick=()=>{cutOpen=cutOpen===+b.dataset.cut?-1:+b.dataset.cut;renderLesson()});
+ if(cutOpen>=0&&c.sentences[cutOpen]){const i=cutOpen,words=c.sentences[i].trim().split(/\s+/);const row=document.querySelectorAll('.sentence')[i];if(words.length>1){const panel=document.createElement('div');panel.className='cut-options';panel.innerHTML=words.map((w,j)=>'<span>'+esc(w)+'</span>'+(j<words.length-1?'<button type=\"button\" data-cut-at=\"'+(j+1)+'\" title=\"여기서 나누기\">✂</button>':'')).join(' ');row.lastElementChild.insertBefore(panel,row.lastElementChild.querySelector('.korean'));panel.querySelectorAll('[data-cut-at]').forEach(b=>b.onclick=()=>{const at=+b.dataset.cutAt;const old=c.sentences[i];snapshotEdit();c.sentences.splice(i,1,words.slice(0,at).join(' '),words.slice(at).join(' '));c.translations=(c.translations||[]).filter(x=>x.index!==i+1).map(x=>({...x,index:x.index>i+1?x.index+1:x.index}));editDone()})}}
+ document.querySelectorAll('[data-speak-line]').forEach(b=>b.onclick=()=>{const i=+b.dataset.speakLine;speakEnglish(c.sentences[i]);});
+ document.querySelectorAll('[data-save-sentence]').forEach(b=>b.onclick=()=>{const i=+b.dataset.saveSentence;if(saveNote(c.sentences[i],'',l.title+' · 문장 '+(base+i+1))){b.textContent='저장됨 ✓';b.disabled=true}});
+ document.querySelectorAll('[data-one-translate]').forEach(b=>b.onclick=()=>{
+ const i=+b.dataset.oneTranslate, original=c.sentences[i];
+ const url='https://translate.google.com/?sl=en&tl=ko&text='+encodeURIComponent(original)+'&op=translate';
+ window.open(url,'_blank');
+ $('translation-'+i).textContent=trans.get(i+1)||'새 창에서 한국어 번역을 복사한 뒤 「번역 붙여넣기 / 수정」을 누르세요.';
+ });
+ document.querySelectorAll('[data-edit-translation]').forEach(b=>b.onclick=()=>{
+ const i=+b.dataset.editTranslation,entry=c.translations.find(x=>x.index===i+1);const old=entry?.ko||'';
+ const value=prompt('Google 번역에서 복사한 한국어를 붙여넣거나 자연스럽게 수정해 주세요.\n한 번 저장하면 다음부터 번역을 다시 하지 않습니다.',old);if(value===null)return;
+ const ko=value.trim();if(!ko)return;
+ if(entry)entry.ko=ko;else c.translations.push({index:i+1,ko});
+
+ persist();renderLesson();
+ });
+
+}
+$('merge-selected').onclick=()=>{
+ const ids=[...editSelection].filter(i=>i>=0&&i<chapter().sentences.length).sort((a,b)=>a-b);
+ if(ids.length<2){alert('합칠 문장을 2개 이상 선택해 주세요.');return}
+ const c=chapter(),old=c.sentences,chosen=new Set(ids),first=ids[0];
+ const merged=mergedText(ids.map(i=>old[i]));
+ const oldTranslations=new Map((c.translations||[]).map(t=>[t.index-1,t.ko]));
+ snapshotEdit();
+ const entries=old.map((text,i)=>({text,from:[i]})).filter((_,i)=>!chosen.has(i)||i===first);
+ const target=entries.find(e=>e.from[0]===first);
+ target.text=merged;target.from=ids;
+ c.sentences=entries.map(e=>e.text);
+ c.translations=entries.flatMap((e,i)=>{
+  const translations=e.from.map(j=>oldTranslations.get(j)).filter(Boolean);
+  return translations.length?[{index:i+1,ko:translations.join(' / ')}]:[];
+ });
+ editDone();
+};
+$('undo-edit').onclick=()=>{if(!editHistory.length)return;state.lesson=JSON.parse(editHistory.pop());editDone()};
+$('clear-selection').onclick=()=>{editSelection.clear();renderLesson()};
+$('prev').onclick=()=>{state.chapter--;editSelection.clear();cutOpen=-1;persist();renderLesson()};
+$('next').onclick=()=>{state.chapter++;editSelection.clear();cutOpen=-1;persist();renderLesson()};
+// Fast, transparent grammar templates. We never pretend to transform a long arbitrary sentence reliably.
+const irregular={go:['went','gone'],eat:['ate','eaten'],see:['saw','seen'],drink:['drank','drunk'],write:['wrote','written'],make:['made','made'],take:['took','taken'],come:['came','come'],get:['got','gotten'],have:['had','had'],do:['did','done'],run:['ran','run'],meet:['met','met'],sleep:['slept','slept'],read:['read','read'],buy:['bought','bought'],feel:['felt','felt'],break:['broke','broken'],study:['studied','studied'],work:['worked','worked'],watch:['watched','watched'],play:['played','played'],cook:['cooked','cooked'],walk:['walked','walked'],visit:['visited','visited'],learn:['learned','learned'],talk:['talked','talked'],practice:['practiced','practiced'],start:['started','started'],finish:['finished','finished'],call:['called','called'],need:['needed','needed'],use:['used','used'],live:['lived','lived'],like:['liked','liked'],love:['loved','loved'],miss:['missed','missed'],spill:['spilled','spilled'],quit:['quit','quit'],say:['said','said'],tell:['told','told'],know:['knew','known']};
+const statives=new Set(['know','like','love','need','want','believe','understand','own','belong']);
+function forms(v){const past=irregular[v]?.[0]||(v.endsWith('e')?v+'d':/[bcdfghjklmnpqrstvwxyz]y$/.test(v)?v.slice(0,-1)+'ied':v+'ed');const pp=irregular[v]?.[1]||past;const ing=v.endsWith('ie')?v.slice(0,-2)+'ying':v.endsWith('e')&&!v.endsWith('ee')?v.slice(0,-1)+'ing':/([aeiou])([bcdfghjklmnpqrstvwxyz])$/.test(v)&&v.length<=4?v+v.at(-1)+'ing':v+'ing';const third=/[^aeiou]y$/.test(v)?v.slice(0,-1)+'ies':/(s|sh|ch|x|z|o)$/.test(v)?v+'es':v+'s';return {past,pp,ing,third}}
+const tenseList=[['현재형','present'],['현재진행형','presentContinuous'],['과거형','past'],['과거진행형','pastContinuous'],['현재완료','presentPerfect'],['현재완료진행형','presentPerfectContinuous'],['과거완료','pastPerfect'],['과거완료진행형','pastPerfectContinuous'],['미래형','future'],['미래진행형','futureContinuous'],['미래완료','futurePerfect'],['미래완료진행형','futurePerfectContinuous']];
+function parseClause(raw){
+ const t=String(raw||'').trim().replace(/[.!?]+$/,'').replace(/\s+/g,' ');
+ if(/[,;]|\b(and|but|because|although|while|when|which|who)\b/i.test(t)||t.length>125)return null;
+ let m=t.match(/^(I|you|we|they|he|she)\s+([a-z]+)(?:\s+(.*))?$/i);
+ if(!m)return null;
+ let subject=m[1],verb=m[2].toLowerCase(),rest=(m[3]||'').trim();
+ // Accept a controlled set of finite base forms; don't guess arbitrary verbs or passive structures.
+ if(!irregular[verb]||['have','do','feel','get','break','know','say','tell','start','quit'].includes(verb))return null;
+ if(/\b(?:am|is|are|was|were|been|being|have|has|had|will|would|could|should|might|must|not)\b/i.test(rest))return null;
+ return {subject,verb,rest};
+}
+function suggestedClause(raw){
+ const t=String(raw||'');
+ const candidates=[[/\b(?:started|start|was|am|have been) drinking (coffee|tea)\b/i,'I drink $1.'],[/\b(?:drink|drank) (coffee|tea)\b/i,'I drink $1.'],[/\b(?:studying|study|studied) English\b/i,'I study English.'],[/\b(?:working|work|worked) (?:out|today)\b/i,'I work out.'],[/\b(?:spill|spilled) (?:all )?the tea\b/i,'I spill the tea.']];
+ for(const [re,out] of candidates){const m=t.match(re);if(m)return out.replace('$1',m[1]||'')}
+ return t.length>125?'I drink coffee.':t;
+}
+function buildTenseDrills(raw){
+ const clause=parseClause(raw);if(!clause)return null;
+ const {subject,verb,rest}=clause, f=forms(verb),r=rest?' '+rest:'';
+ const lower=subject.toLowerCase(),third=['he','she'].includes(lower),i=lower==='i';
+ const be=third?'is':i?'am':'are',was=third||i?'was':'were',have=third?'has':'have',does=third?'does':'do';
+ const s2=third?'They':'She',secondThird=!third;
+ const statements={
+ present:sub=>sub+' '+(sub==='She'?f.third:verb)+r,
+ presentContinuous:sub=>sub+' '+(sub==='She'?'is':'are')+' '+f.ing+r,
+ past:sub=>sub+' '+f.past+r,
+ pastContinuous:sub=>sub+' '+(sub==='She'?'was':'were')+' '+f.ing+r,
+ presentPerfect:sub=>sub+' '+(sub==='She'?'has':'have')+' '+f.pp+r,
+ presentPerfectContinuous:sub=>sub+' '+(sub==='She'?'has':'have')+' been '+f.ing+r,
+ pastPerfect:sub=>sub+' had '+f.pp+r,
+ pastPerfectContinuous:sub=>sub+' had been '+f.ing+r,
+ future:sub=>sub+' will '+verb+r,
+ futureContinuous:sub=>sub+' will be '+f.ing+r,
+ futurePerfect:sub=>sub+' will have '+f.pp+r,
+ futurePerfectContinuous:sub=>sub+' will have been '+f.ing+r
+ };
+ const s=subject,ss=subject.toLowerCase(),v=verb,ing=f.ing,pp=f.pp;
+ const affirmative={present:s+' '+(third?f.third:v)+r,presentContinuous:s+' '+be+' '+ing+r,past:s+' '+f.past+r,pastContinuous:s+' '+was+' '+ing+r,presentPerfect:s+' '+have+' '+pp+r,presentPerfectContinuous:s+' '+have+' been '+ing+r,pastPerfect:s+' had '+pp+r,pastPerfectContinuous:s+' had been '+ing+r,future:s+' will '+v+r,futureContinuous:s+' will be '+ing+r,futurePerfect:s+' will have '+pp+r,futurePerfectContinuous:s+' will have been '+ing+r};
+ const negative={present:s+' '+(third?'does not':'do not')+' '+v+r,presentContinuous:s+' '+be+' not '+ing+r,past:s+' did not '+v+r,pastContinuous:s+' '+was+' not '+ing+r,presentPerfect:s+' '+have+' not '+pp+r,presentPerfectContinuous:s+' '+have+' not been '+ing+r,pastPerfect:s+' had not '+pp+r,pastPerfectContinuous:s+' had not been '+ing+r,future:s+' will not '+v+r,futureContinuous:s+' will not be '+ing+r,futurePerfect:s+' will not have '+pp+r,futurePerfectContinuous:s+' will not have been '+ing+r};
+ const qSubject=i?'you':ss, qb=i?'Are':third?'Is':'Are',qwas=i?'Were':third?'Was':'Were',qhave=i?'Have':third?'Has':'Have',qdoes=i?'Do':third?'Does':'Do';
+ const question={present:qdoes+' '+qSubject+' '+v+r,presentContinuous:qb+' '+qSubject+' '+ing+r,past:'Did '+qSubject+' '+v+r,pastContinuous:qwas+' '+qSubject+' '+ing+r,presentPerfect:qhave+' '+qSubject+' '+pp+r,presentPerfectContinuous:qhave+' '+qSubject+' been '+ing+r,pastPerfect:'Had '+qSubject+' '+pp+r,pastPerfectContinuous:'Had '+qSubject+' been '+ing+r,future:'Will '+qSubject+' '+v+r,futureContinuous:'Will '+qSubject+' be '+ing+r,futurePerfect:'Will '+qSubject+' have '+pp+r,futurePerfectContinuous:'Will '+qSubject+' have been '+ing+r};
+ const subjectForms={present:s2+' '+(secondThird?f.third:v)+r,presentContinuous:s2+' '+(secondThird?'is':'are')+' '+ing+r,past:s2+' '+f.past+r,pastContinuous:s2+' '+(secondThird?'was':'were')+' '+ing+r,presentPerfect:s2+' '+(secondThird?'has':'have')+' '+pp+r,presentPerfectContinuous:s2+' '+(secondThird?'has':'have')+' been '+ing+r,pastPerfect:s2+' had '+pp+r,pastPerfectContinuous:s2+' had been '+ing+r,future:s2+' will '+v+r,futureContinuous:s2+' will be '+ing+r,futurePerfect:s2+' will have '+pp+r,futurePerfectContinuous:s2+' will have been '+ing+r};
+ const items=[];for(const [label,key] of tenseList){if(statives.has(verb)&&/Continuous/.test(key))continue;
+ for(const [kind,dict] of [['평서문',affirmative],['부정문',negative],['의문문',question],['주어 변경',subjectForms]]){
+ items.push({kind,tense:label,tenseKey:key,ko:label+' · '+kind+(kind==='주어 변경'?' ('+s2+')':'')+'으로 바꿔 말해 보세요.',answer:dict[key]+(kind==='의문문'?'?':'.'),tip:label+' / '+kind+' · 시간 표현에 따라 실제 의미가 달라질 수 있어요.'});}}
+ return {base:affirmative.present+'.',items};
+}
+// V11: offline, curated situational expansion for the sample phrase.
+const scenarioBank=[
+['오랜만에','그녀를 본 지 꽤 오래됐어.','It has been a long time since I last saw her.','현재완료','평서문'],
+['오랜만에','우리가 함께 저녁을 먹은 지 꽤 오래됐어.','It has been a while since we last had dinner together.','현재완료','평서문'],
+['오랜만에','네 소식을 들은 지 오래됐어.','It has been a long time since I last heard from you.','현재완료','평서문'],
+['오랜만에','그 친구를 만난 지 오래되지는 않았어.','It has not been long since I last met him.','현재완료','부정문'],
+['오랜만에','우리가 마지막으로 만난 지 오래됐어?','Has it been a long time since we last met?','현재완료','의문문'],
+['오랜만에','네가 한국에 온 지 얼마나 됐어?','How long has it been since you came to Korea?','현재완료','의문문'],
+['오랜만에','그때는 우리가 만난 지 이미 2년이 지난 상태였어.','It had been two years since we had last met.','과거완료','평서문'],
+['오랜만에','다음 주면 내가 그를 마지막으로 본 지 1년이 될 거야.','By next week, it will have been a year since I last saw him.','미래완료','평서문'],
+['본 경험','나는 그 영화를 본 적이 있어.','I have seen that movie.','현재완료','평서문'],
+['본 경험','나는 그 영화를 아직 못 봤어.','I have not seen that movie yet.','현재완료','부정문'],
+['본 경험','너 그 영화를 본 적 있어?','Have you seen that movie?','현재완료','의문문'],
+['본 경험','그녀는 그 영화를 본 적이 있어.','She has seen that movie.','현재완료','주어 변경'],
+['본 경험','나는 어제 그 영화를 봤어.','I saw that movie yesterday.','과거형','평서문'],
+['본 경험','나는 어제 그 영화를 보지 않았어.','I did not see that movie yesterday.','과거형','부정문'],
+['본 경험','너 어제 그 영화를 봤어?','Did you see that movie yesterday?','과거형','의문문'],
+['본 경험','나는 내일 그 영화를 볼 거야.','I will see that movie tomorrow.','미래형','평서문'],
+['본 경험','그녀는 내일 그 영화를 보지 않을 거야.','She will not see that movie tomorrow.','미래형','부정문'],
+['본 경험','그들은 내일 그 영화를 볼까?','Will they see that movie tomorrow?','미래형','의문문'],
+['일상 확장','나는 요즘 친구들을 자주 만나.','I see my friends often these days.','현재형','평서문'],
+['일상 확장','그는 요즘 친구들을 자주 만나지 않아.','He does not see his friends often these days.','현재형','부정문'],
+['일상 확장','너는 요즘 친구들을 자주 만나?','Do you see your friends often these days?','현재형','의문문'],
+['일상 확장','나는 지금 친구를 만나러 가는 중이야.','I am going to see a friend right now.','현재진행형','평서문'],
+['일상 확장','나는 어제 친구를 만나러 가고 있었어.','I was going to see a friend yesterday.','과거진행형','평서문'],
+['일상 확장','그때까지 나는 그 영화를 본 적이 없었어.','I had not seen that movie by then.','과거완료','부정문'],
+['일상 확장','너는 그때까지 그 영화를 봤었어?','Had you seen that movie by then?','과거완료','의문문'],
+['일상 확장','내일 이맘때 나는 친구를 만나고 있을 거야.','I will be seeing a friend at this time tomorrow.','미래진행형','평서문'],
+['일상 확장','금요일까지 나는 그 영화를 봤을 거야.','I will have seen that movie by Friday.','미래완료','평서문'],
+['일상 확장','금요일까지 너는 그 영화를 봤을까?','Will you have seen that movie by Friday?','미래완료','의문문'],
+['일상 확장','나는 최근에 가족을 자주 만나고 있어.','I have been seeing my family often lately.','현재완료진행형','평서문'],
+['일상 확장','그때까지 나는 몇 주 동안 그를 만나고 있었어.','I had been seeing him for several weeks by then.','과거완료진행형','평서문'],
+['일상 확장','다음 달이면 나는 그 수업에 1년 동안 다니고 있는 셈이 될 거야.','By next month, I will have been attending that class for a year.','미래완료진행형','평서문'],
+['일상 확장','나는 그 식당에 가 본 적이 없어.','I have never been to that restaurant.','현재완료','부정문'],
+['일상 확장','그 식당에 가 본 적 있어?','Have you ever been to that restaurant?','현재완료','의문문'],
+['일상 확장','그녀는 그 식당에 가 본 적이 있어.','She has been to that restaurant.','현재완료','주어 변경'],
+['일상 확장','우리는 다음 달에 다시 만날 거야.','We will meet again next month.','미래형','평서문'],
+['일상 확장','그들은 다음 달에 다시 만나지 않을 거야.','They will not meet again next month.','미래형','부정문']
+];
+function isSamplePhrase(raw){return /(?:hot minute|been (?:a long time|a while) since|haven.t seen you guys)/i.test(String(raw||''));}
+
+// Human-reviewed situational pattern banks. No AI calls, no invented automatic parsing.
+const extraBanks={
+ coffee:[
+ ['커피 습관','나는 아침마다 커피를 마셔.','I drink coffee every morning.','현재형','평서문'],
+ ['커피 습관','그녀는 저녁에 커피를 마시지 않아.','She does not drink coffee in the evening.','현재형','부정문'],
+ ['커피 습관','너는 매일 커피를 마셔?','Do you drink coffee every day?','현재형','의문문'],
+ ['커피 습관','나는 지금 커피를 마시고 있어.','I am drinking coffee right now.','현재진행형','평서문'],
+ ['커피 습관','그는 지금 커피를 마시고 있지 않아.','He is not drinking coffee right now.','현재진행형','부정문'],
+ ['커피 습관','나는 어제 커피를 너무 많이 마셨어.','I drank too much coffee yesterday.','과거형','평서문'],
+ ['커피 습관','너 어제 커피 마셨어?','Did you drink coffee yesterday?','과거형','의문문'],
+ ['커피 습관','나는 오늘 커피를 세 잔 마셨어.','I have had three cups of coffee today.','현재완료','평서문'],
+ ['커피 습관','나는 오늘 아직 커피를 마시지 않았어.','I have not had coffee yet today.','현재완료','부정문'],
+ ['커피 습관','너 오늘 커피 마셨어?','Have you had coffee today?','현재완료','의문문'],
+ ['커피 습관','나는 내일 커피를 덜 마실 거야.','I will drink less coffee tomorrow.','미래형','평서문'],
+ ['커피 습관','나는 내일 저녁에 커피를 마시지 않을 거야.','I will not drink coffee tomorrow evening.','미래형','부정문'],
+ ['카페인 표현','나 커피를 너무 많이 마셔서 좀 들떠 있어.','I am a little wired from too much coffee.','현재형','평서문'],
+ ['카페인 표현','너 지금 카페인 때문에 들떠 있어?','Are you wired from caffeine right now?','현재형','의문문'],
+ ['카페인 표현','나 어젯밤 커피 때문에 잠을 못 잤어.','I could not sleep last night because of coffee.','과거형','부정문']
+ ],
+ catchup:[
+ ['안부','우리 밀린 이야기가 정말 많아.','We have so much to catch up on.','현재형','평서문'],
+ ['안부','우리 밀린 이야기가 별로 없어.','We do not have much to catch up on.','현재형','부정문'],
+ ['안부','우리 밀린 이야기 많지?','Do we have a lot to catch up on?','현재형','의문문'],
+ ['안부','너 요즘 어떻게 지내?','How have you been lately?','현재완료','의문문'],
+ ['안부','나는 오랫동안 친구들과 연락하지 못했어.','I have not kept in touch with my friends for a long time.','현재완료','부정문'],
+ ['안부','나는 어제 오랜 친구와 밀린 이야기를 나눴어.','I caught up with an old friend yesterday.','과거형','평서문'],
+ ['안부','너 어제 그 친구와 밀린 이야기 나눴어?','Did you catch up with that friend yesterday?','과거형','의문문'],
+ ['안부','우리 다음 주에 만나서 밀린 이야기 나누자.','Let us catch up next week.','미래형','평서문'],
+ ['안부','그녀는 내일 친구와 만나서 밀린 이야기를 나눌 거야.','She will catch up with a friend tomorrow.','미래형','주어 변경']
+ ],
+ travel:[
+ ['여행','나는 며칠 전에 스페인에서 돌아왔어.','I came back from Spain a few days ago.','과거형','평서문'],
+ ['여행','그녀는 어제 여행에서 돌아오지 않았어.','She did not come back from her trip yesterday.','과거형','부정문'],
+ ['여행','너 언제 스페인에서 돌아왔어?','When did you come back from Spain?','과거형','의문문'],
+ ['여행','나는 방금 집에 돌아왔어.','I have just come back home.','현재완료','평서문'],
+ ['여행','그는 아직 집에 돌아오지 않았어.','He has not come back home yet.','현재완료','부정문'],
+ ['여행','너 벌써 돌아왔어?','Have you come back already?','현재완료','의문문'],
+ ['여행','나는 다음 주에 스페인에서 돌아올 거야.','I will come back from Spain next week.','미래형','평서문'],
+ ['여행','그녀는 다음 주에 돌아오지 않을 거야.','She will not come back next week.','미래형','부정문']
+ ]
+};
+function patternBank(raw){const t=String(raw||'').toLowerCase();
+ if(/coffee|caffeine|cracked out/.test(t))return extraBanks.coffee;
+ if(/catch up|how are you|how have you been/.test(t))return extraBanks.catchup;
+ if(/came back|come back|back from spain/.test(t))return extraBanks.travel;
+ return null;
+}
+
+function expansionDrills(raw){const bank=patternBank(raw);if(bank)return {base:raw,items:bank.map(([topic,ko,answer,tense,kind])=>({topic,ko,answer,tense,kind,tenseKey:(tenseList.find(x=>x[0]===tense)||[])[1]||'present',tip:'검토된 일상 회화 예문입니다. 원문과 같은 주제의 확장 연습이에요.'}))};if(!isSamplePhrase(raw))return null;return {base:raw,items:scenarioBank.map(([topic,ko,answer,tense,kind])=>({topic,ko,answer,tense,kind,tenseKey:(tenseList.find(x=>x[0]===tense)||[])[1]||'present',tip:'저장 문장에서 추출한 표현을 다른 일상 상황으로 확장했어요.'}))};}
+function shuffleItems(a){const out=[...a];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out;}
+let activeNoteId=null,drillIndex=0,drillShown=false,drillSet=[],drillBase='',practiceOverride='',tenseKey='all',structureKey='all',drillMode='expand',drillWrong=[],drillShuffle=false;
+function setupDrills(){const result=(drillMode==='expand'?expansionDrills(practiceOverride):null)||buildTenseDrills(practiceOverride);drillBase=result?.base||practiceOverride;drillSet=(result?.items||[]).filter(x=>(tenseKey==='all'||x.tenseKey===tenseKey)&&(structureKey==='all'||x.kind===structureKey));if(drillShuffle)drillSet=shuffleItems(drillSet);drillIndex=0;drillShown=false;drillWrong=[];drillFeedback="";renderDrill();}
+function normalizeAnswer(s){return String(s||'').toLowerCase().replace(/\b(i am)\b/g,"i'm").replace(/\b(i have)\b/g,"i've").replace(/\b(do not)\b/g,"don't").replace(/\b(did not)\b/g,"didn't").replace(/\b(has not)\b/g,"hasn't").replace(/\b(have not)\b/g,"haven't").replace(/\b(will not)\b/g,"won't").replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim()}
+let drillFeedback='',drillMic=null;
+function renderDrill(){const area=$('drill-area');if(!area)return;
+ if(!drillSet.length){area.innerHTML='<div class="notice">이 문장에서 지원하는 연습 패턴을 찾지 못했어요. 현재는 오랜만에 · 커피 · 안부 · 여행 패턴과 제한된 짧은 동사 문장만 지원합니다. 지원되지 않는 문장을 억지로 변형하지 않습니다. 예시 문장을 선택하거나 원문에서 핵심 표현을 저장해 주세요.</div>';return;}
+ const x=drillSet[drillIndex];area.innerHTML='<div class="drill-panel"><div class="chapter-top"><span class="tag">'+esc(x.topic||x.tense)+' · '+esc(x.tense)+' · '+esc(x.kind)+'</span><span class="progress">'+(drillIndex+1)+' / '+drillSet.length+'</span></div><div class="drill-question">'+esc(x.ko)+'</div><p class="muted">기준: '+esc(drillBase)+'</p><textarea class="field" id="drill-input" placeholder="영어로 말하거나 직접 입력해 보세요."></textarea><div class="actions"><button class="btn alt small" id="drill-mic">🎙 말해서 입력</button><button class="btn" id="drill-submit">✓ 정답 제출</button><button class="btn alt small" id="drill-listen">🔊 정답 듣기</button><button class="btn alt small" id="drill-reveal">'+(drillShown?'정답 숨기기':'정답 보기')+'</button></div><div class="status" id="drill-mic-status" aria-live="polite">마이크를 누른 뒤 영어로 말하거나 키보드로 입력해 주세요.</div><div class="status" id="drill-feedback" aria-live="polite">'+esc(drillFeedback)+'</div>'+(drillShown?'<div class="answer"><strong>'+esc(x.answer)+'</strong><p>'+esc(x.tip)+'</p></div>':'')+'<div class="actions" style="margin-top:12px"><button class="btn alt small" id="drill-wrong">☆ 복습에 추가 ('+drillWrong.length+')</button><button class="btn alt small" id="drill-prev" '+(drillIndex===0?'disabled':'')+'>← 이전</button><button class="btn small" id="drill-next">'+(drillIndex===drillSet.length-1?'처음부터 ↻':'다음 →')+'</button></div></div>';
+ $('drill-wrong').onclick=()=>{if(!drillWrong.includes(x))drillWrong.push(x);$('drill-wrong').textContent='✓ 복습 목록에 추가됨 ('+drillWrong.length+')'};
+ $('drill-submit').onclick=()=>{const typed=$('drill-input').value.trim();if(!typed){$('drill-feedback').textContent='먼저 영어로 말하거나 입력해 주세요.';return;}const correct=normalizeAnswer(typed)===normalizeAnswer(x.answer);drillFeedback=correct?'✅ 모범 답안과 일치해요!':'📘 모범 답안과 표현이 달라요. 다른 자연스러운 정답도 가능해요. 아래 문장과 비교해 보세요.';if(!correct&&!drillWrong.includes(x))drillWrong.push(x);drillShown=true;const saved=typed;renderDrill();$('drill-input').value=saved;};
+ $('drill-reveal').onclick=()=>{const typed=$('drill-input').value;drillShown=!drillShown;renderDrill();$('drill-input').value=typed};
+ $('drill-prev').onclick=()=>{drillIndex=Math.max(0,drillIndex-1);drillShown=false;drillFeedback='';renderDrill()};
+ $('drill-next').onclick=()=>{if(drillIndex===drillSet.length-1&&drillWrong.length){drillSet=shuffleItems(drillWrong);drillWrong=[];drillIndex=0}else{drillIndex=(drillIndex+1)%drillSet.length}drillShown=false;drillFeedback='';renderDrill()};
+ $('drill-mic').onclick=()=>{const status=$('drill-mic-status');const btn=$('drill-mic');const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){status.textContent='이 브라우저는 음성 인식을 지원하지 않아요. Chrome/Edge에서 시도하거나 직접 입력해 주세요.';return;}if(drillMic){try{drillMic.stop()}catch(e){}return;}const r=new SR();drillMic=r;r.lang='en-US';r.interimResults=true;r.continuous=false;r.maxAlternatives=1;let heard='';r.onstart=()=>{status.textContent='🔴 듣는 중… 영어로 말해 주세요.';btn.textContent='■ 녹음 중지';};r.onresult=e=>{let final='',interim='';for(let i=0;i<e.results.length;i++){if(e.results[i].isFinal)final+=e.results[i][0].transcript+' ';else interim+=e.results[i][0].transcript;}heard=(final||interim).trim();$('drill-input').value=heard;status.textContent='인식된 영어: '+heard;};r.onerror=e=>{status.textContent='음성 인식 오류 ('+e.error+'). 마이크 권한과 인터넷 연결을 확인하거나 직접 입력해 주세요.';};r.onend=()=>{drillMic=null;btn.textContent='🎙 말해서 입력';if(!heard&&status.textContent.includes('듣는 중'))status.textContent='음성이 인식되지 않았어요. 다시 눌러 말해 주세요.';};try{r.start()}catch(e){drillMic=null;status.textContent='마이크를 시작하지 못했어요: '+e.message;}};
+ $('drill-listen').onclick=()=>speakEnglish(x.answer);
+}
+function speakEnglish(text){if(!('speechSynthesis' in window)){alert('읽어주기를 지원하지 않는 브라우저예요.');return;}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.88;u.onerror=e=>console.warn('음성 출력 오류',e.error);window.speechSynthesis.speak(u);}
+// V15: reviewed offline pattern bank. No generated, unrelated tense drills.
+const v15Bank=[
+{id:'since',name:'It has been ~ since ...',hint:'~한 지 시간이 지났다',match:/hot minute|been .*since|long time since|been a while/i,q:[['그녀를 본 지 꽤 오래됐어.','It has been a long time since I saw her.'],['우리가 마지막으로 만난 지 2년이 됐어.','It has been two years since we last met.'],['그와 이야기한 지 오래되지는 않았어.','It has not been long since I talked to him.'],['네가 그녀를 본 지 오래됐어?','Has it been a long time since you saw her?']]},
+{id:'seen',name:'have / has + p.p.',hint:'현재완료: 경험·완료·지속',match:/i.ve seen|have seen|has seen|haven.t seen/i,q:[['나는 그 영화를 본 적 있어.','I have seen that movie.'],['그는 그 영화를 아직 보지 않았어.','He has not seen that movie yet.'],['너 그 영화를 본 적 있어?','Have you seen that movie?'],['우리는 전에 그를 만난 적이 있어.','We have met him before.']]},
+{id:'catchup',name:'catch up on / with',hint:'밀린 일을 하다 / 못 나눈 이야기를 하다',match:/catch up/i,q:[['우리 밀린 이야기가 정말 많아.','We have so much to catch up on.'],['이번 주말에 밀린 일을 해야 해.','I need to catch up on work this weekend.'],['너 친구들과 밀린 이야기 나눴어?','Did you catch up with your friends?'],['그녀는 어제 밀린 공부를 했어.','She caught up on her studying yesterday.']]},
+{id:'coffee',name:'be wired from / on caffeine',hint:'카페인 때문에 각성되거나 들뜨다',match:/cracked out|wired|caffeine/i,q:[['나 커피 때문에 좀 들떠 있어.','I am a little wired from coffee.'],['그는 어제 카페인 때문에 잠을 못 잤어.','He could not sleep because of the caffeine yesterday.'],['너 지금 커피 때문에 그렇게 들뜬 거야?','Are you that wired from coffee?'],['나는 오늘 카페인 때문에 들떠 있지는 않아.','I am not wired from caffeine today.']]},
+{id:'supposed',name:'be supposed to',hint:'~하기로 되어 있다',match:/supposed to/i,q:[['나는 9시까지 도착하기로 되어 있어.','I am supposed to arrive by nine.'],['그는 오늘 일하기로 되어 있지 않아.','He is not supposed to work today.'],['우리는 여기서 기다려야 해?','Are we supposed to wait here?'],['그들은 어제 만나기로 되어 있었어.','They were supposed to meet yesterday.']]},
+{id:'usedto',name:'used to + 동사원형',hint:'예전에 ~하곤 했다',match:/used to/i,q:[['나는 예전에 매일 달렸어.','I used to run every day.'],['그녀는 예전에 커피를 마시지 않았어.','She did not use to drink coffee.'],['너 예전에 여기 살았어?','Did you use to live here?'],['우리는 어릴 때 이 공원에서 놀곤 했어.','We used to play in this park as kids.']]},
+{id:'feel',name:'feel like + -ing',hint:'~하고 싶다',match:/feel like/i,q:[['나 오늘 산책하고 싶어.','I feel like taking a walk today.'],['그녀는 지금 요리하고 싶지 않아.','She does not feel like cooking right now.'],['너 영화 보고 싶어?','Do you feel like watching a movie?'],['어제는 아무것도 하고 싶지 않았어.','I did not feel like doing anything yesterday.']]},
+{id:'ever',name:'Have you ever + p.p.?',hint:'~해 본 적 있니?',match:/have you ever|ever been|ever tried/i,q:[['너 일본에 가 본 적 있어?','Have you ever been to Japan?'],['그녀는 스시를 먹어 본 적이 없어.','She has never tried sushi.'],['너 혼자 여행해 본 적 있어?','Have you ever traveled alone?'],['나는 그걸 전에 해 본 적 있어.','I have done that before.']]},
+{id:'going',name:'be going to + 동사원형',hint:'~할 예정이다',match:/going to|gonna/i,q:[['나는 내일 친구를 만날 거야.','I am going to meet a friend tomorrow.'],['그는 오늘 밤 외출하지 않을 거야.','He is not going to go out tonight.'],['너 주말에 뭐 할 거야?','What are you going to do this weekend?'],['우리는 다음 주에 여행을 갈 거야.','We are going to take a trip next week.']]},
+{id:'might',name:'might have + p.p.',hint:'과거에 ~했을지도 모른다',match:/might have|may have/i,q:[['그녀는 어제 늦게까지 일했을지도 몰라.','She might have worked late yesterday.'],['그는 내 메시지를 못 봤을지도 몰라.','He might not have seen my message.'],['그들은 이미 집에 도착했을지도 몰라.','They might have already arrived home.'],['내가 열쇠를 집에 두고 왔을지도 몰라.','I might have left my keys at home.']]}
+];
+let v15Pattern='auto',v15Index=0,v15Items=[],v15Wrong=[],v15Show=false,v15Answer='',v15Feedback='',v15OnlyWrong=false;
+function v15Match(note){return v15Bank.filter(p=>p.match.test(note.en))}
+function v15Norm(t){return String(t||'').toLowerCase().replace(/\b(i'm)\b/g,'i am').replace(/\b(he's)\b/g,'he is').replace(/\b(she's)\b/g,'she is').replace(/\b(isn't)\b/g,'is not').replace(/\b(aren't)\b/g,'are not').replace(/\b(don't)\b/g,'do not').replace(/\b(didn't)\b/g,'did not').replace(/\b(haven't)\b/g,'have not').replace(/\b(hasn't)\b/g,'has not').replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim()}
+function v15Start(){const n=state.notes.find(x=>x.id===activeNoteId);const found=n?v15Match(n):[];const p=v15Bank.find(x=>x.id===v15Pattern)||(found[0]||null);v15Items=p?p.q.map((q,i)=>({ko:q[0],answer:q[1],pattern:p.name,id:p.id+'-'+i})):[];v15Index=0;v15Wrong=[];v15Show=false;v15Feedback='';v15OnlyWrong=false;v15RenderQuestion()}
+function v15RenderQuestion(){const el=$('v15-questions');if(!el)return;if(!v15Items.length){el.innerHTML='<div class="notice">이 문장에서 자동 연결되는 검토 패턴은 아직 없어요. 위에서 학습할 패턴을 직접 선택하면 연습할 수 있어요. 원문 듣기·따라 말하기는 그대로 사용할 수 있어요.</div>';return}const x=v15Items[v15Index];el.innerHTML='<div class="drill-panel"><div class="chapter-top"><span class="tag">'+esc(x.pattern)+'</span><span class="progress">'+(v15Index+1)+' / '+v15Items.length+'</span></div><div class="drill-question">'+esc(x.ko)+'</div><textarea id="v15-input" class="field" style="min-height:85px" placeholder="영어로 말하거나 입력해 보세요.">'+esc(v15Answer)+'</textarea><div class="actions"><button class="btn alt small" id="v15-mic">🎙 말하기</button><button class="btn" id="v15-submit">정답 제출</button><button class="btn alt small" id="v15-reveal">'+(v15Show?'정답 숨기기':'정답 보기')+'</button><button class="btn alt small" id="v15-listen">🔊 정답 듣기</button></div><div class="status" id="v15-status">'+esc(v15Feedback)+'</div>'+(v15Show?'<div class="answer"><strong>'+esc(x.answer)+'</strong><p>다른 자연스러운 표현도 정답일 수 있어요. 여기서는 모범 답안과의 일치 여부만 확인해요.</p></div>':'')+'<div class="actions" style="margin-top:12px"><button class="btn alt small" id="v15-mark">☆ 오답 복습에 추가 ('+v15Wrong.length+')</button><button class="btn alt small" id="v15-prev">← 이전</button><button class="btn small" id="v15-next">'+(v15Index===v15Items.length-1?'처음부터 ↻':'다음 →')+'</button><button class="btn alt small" id="v15-review">오답만 복습 ('+v15Wrong.length+')</button></div></div>';
+const input=$('v15-input');input.oninput=()=>v15Answer=input.value;$('v15-listen').onclick=()=>speakEnglish(x.answer);$('v15-reveal').onclick=()=>{v15Answer=input.value;v15Show=!v15Show;v15RenderQuestion()};$('v15-submit').onclick=()=>{v15Answer=input.value;if(!v15Answer.trim()){$('v15-status').textContent='답변을 먼저 입력해 주세요.';return}const ok=v15Norm(v15Answer)===v15Norm(x.answer);v15Feedback=ok?'✅ 모범 답안과 일치해요!':'📘 모범 답안과 달라요. 아래 정답을 비교해 보세요.';if(!ok&&!v15Wrong.some(y=>y.id===x.id))v15Wrong.push(x);v15Show=true;v15RenderQuestion()};$('v15-mark').onclick=()=>{if(!v15Wrong.some(y=>y.id===x.id))v15Wrong.push(x);$('v15-mark').textContent='✓ 복습에 추가됨 ('+v15Wrong.length+')'};$('v15-prev').onclick=()=>{v15Index=Math.max(0,v15Index-1);v15Reset()};$('v15-next').onclick=()=>{v15Index=(v15Index+1)%v15Items.length;v15Reset()};$('v15-review').onclick=()=>{if(!v15Wrong.length){$('v15-status').textContent='아직 오답으로 표시한 문제가 없어요.';return}v15Items=[...v15Wrong];v15Wrong=[];v15Index=0;v15Reset()};$('v15-mic').onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$('v15-status').textContent='음성 인식이 지원되지 않아요. 직접 입력해 주세요.';return}const r=new SR();r.lang='en-US';r.interimResults=false;$('v15-status').textContent='🎙 듣는 중…';r.onresult=e=>{v15Answer=e.results[0][0].transcript;input.value=v15Answer;$('v15-status').textContent='인식 완료. 정답 제출을 눌러 주세요.'};r.onerror=e=>$('v15-status').textContent='마이크 오류: '+e.error;r.start()};}
+function v15Reset(){v15Answer='';v15Show=false;v15Feedback='';v15RenderQuestion()}
+function renderPractice(){const notes=state.notes||[];$('practice-heading').textContent='내 문장 노트 · '+notes.length+'개 저장';const n=notes.find(x=>x.id===activeNoteId)||notes[0]||null;if(n)activeNoteId=n.id;const found=n?v15Match(n):[];
+$('practice-list').innerHTML=(n?'<label>저장 문장 선택</label><select class="field" id="practice-select">'+notes.map(x=>'<option value="'+esc(x.id)+'" '+(x.id===n.id?'selected':'')+'>'+esc(x.en.slice(0,110))+'</option>').join('')+'</select><div class="practice"><span class="tag">MY SAVED SENTENCE</span><h3>'+esc(n.en)+'</h3><p>'+esc(n.ko||'')+'</p><div class="actions"><button class="btn alt small" id="listen-original">🔊 원문 듣기</button><button class="btn alt small" id="speak-original">🎙 원문 따라 말하기</button></div><div class="status" id="speech-status"></div><div class="korean" id="speech-result"></div></div>':'<div class="notice">저장된 문장이 없어도 아래 패턴 학습은 사용할 수 있어요. 영상 학습 또는 문장 노트에서 문장을 저장해 보세요.</div>')+'<div class="card"><h2>📚 검토된 핵심 회화 패턴</h2><p>저장 문장에 맞는 패턴은 자동 추천돼요. 매칭되지 않으면 직접 선택할 수 있어요. AI 호출 없이 10개 패턴 × 4문제를 반복해요.</p><label>연습할 패턴</label><select class="field" id="v15-pattern"><option value="auto">'+(found.length?'✨ 저장 문장과 연결: '+found.map(x=>x.name).join(', '):'자동 연결 (일치하는 패턴 없음)')+'</option>'+v15Bank.map(p=>'<option value="'+p.id+'">'+esc(p.name)+' — '+esc(p.hint)+'</option>').join('')+'</select><div class="actions"><button class="btn" id="v15-start">연습 시작 / 다시 시작</button><button class="btn alt" id="v15-random">문제 순서 섞기</button></div><div id="v15-questions"></div></div>';
+if(n){$('practice-select').onchange=e=>{activeNoteId=e.target.value;v15Pattern='auto';renderPractice()};$('listen-original').onclick=()=>speakEnglish(n.en);$('speak-original').onclick=()=>recognizeEnglish(t=>{$('speech-result').textContent='인식된 문장: '+t;$('speech-status').textContent='인식 완료 (발음 점수는 제공하지 않아요)'})}
+$('v15-pattern').value=v15Pattern;$('v15-pattern').onchange=e=>{v15Pattern=e.target.value;v15Start()};$('v15-start').onclick=v15Start;$('v15-random').onclick=()=>{if(!v15Items.length){v15Start()}v15Items=[...v15Items].sort(()=>Math.random()-.5);v15Index=0;v15Reset()};v15Start();}
+function recognizeEnglish(done){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){alert('이 브라우저에서 음성 인식을 지원하지 않아요. 최신 Edge 또는 Chrome에서 확인해 주세요.');return}
+ const r=new SR();r.lang='en-US';r.interimResults=false;r.maxAlternatives=1;
+ const status=$('speech-status');if(status)status.textContent='🎙 듣는 중… 영어로 말해 주세요.';
+ r.onresult=e=>{done(e.results[0][0].transcript);if(status&&status.textContent.includes('듣는 중'))status.textContent='음성 인식 완료'};
+ r.onerror=e=>{if(status)status.textContent='마이크 오류: '+e.error+' · 권한과 브라우저 설정을 확인해 주세요.'};
+ try{r.start()}catch(e){alert('마이크를 시작하지 못했어요: '+e.message)}
+}
+$('go-study').onclick=()=>page('study');
+function renderNotes(){
+ const q=$('note-search').value.trim().toLowerCase();
+ $('note-count').textContent='('+state.notes.length+'개)';
+ const notes=state.notes.filter(n=>String(n.en||'').toLowerCase().includes(q));
+ $('note-list').innerHTML=notes.length?notes.map(n=>'<div class="note"><strong>'+esc(n.en)+'</strong><div class="muted" style="margin:8px 0">'+esc(n.source||'직접 저장')+'</div><div class="actions" style="margin-top:7px"><button class="btn alt small" data-google-note="'+esc(n.id)+'">🌐 Google 번역</button><button class="btn alt small" data-del="'+esc(n.id)+'">삭제</button><span data-note-patterns="'+esc(n.id)+'" class="actions"></span></div></div>').join(''):'<p>검색된 문장이 없어요. 영상에서 문장을 저장해 보세요.</p>';
+ document.querySelectorAll('[data-google-note]').forEach(b=>b.onclick=()=>{const n=state.notes.find(x=>x.id===b.dataset.googleNote);if(n)window.open('https://translate.google.com/?sl=en&tl=ko&text='+encodeURIComponent(n.en)+'&op=translate','_blank','noopener')});
+ document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{if(confirm('이 표현을 삭제할까요?')){state.notes=state.notes.filter(n=>n.id!==b.dataset.del);persist();renderNotes()}});
+ document.querySelectorAll('[data-note-patterns]').forEach(slot=>{
+  const n=state.notes.find(x=>x.id===slot.dataset.notePatterns);
+  const matches=n&&window.oliveFindAllPatternsForSentence?.(n.en);
+  if(!matches){slot.textContent='연습문제 확인 중';return}
+  if(!matches.length){slot.textContent='연습문제 없음';return}
+  matches.forEach(match=>{const b=document.createElement('button');b.className='btn small';b.textContent=matches.length===1?'패턴 연습하러 가기':match.name+' 연습하기';b.onclick=()=>{page('patterns');window.oliveOpenPattern?.(match.id)};slot.appendChild(b)})
+ });
+}
+window.addEventListener('olive-patterns-ready',()=>{if($('notes').classList.contains('active'))renderNotes()});
+$('note-search').oninput=renderNotes;
+$('manual-save').onclick=()=>{if(saveNote($('manual-en').value,'','직접 저장'))$('manual-en').value=''};
+$('backup').onclick=()=>{const blob=new Blob([JSON.stringify({notes:state.notes,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='olive-v15-notes-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+if(state.lesson){$('title').value=state.lesson.title;renderLesson();}renderNotes();
+</script><script src="./patterns.js?v=42"></script><script src="./tense_practice.js"></script></body></html>
