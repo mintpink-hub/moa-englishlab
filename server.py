@@ -18,14 +18,70 @@ def video_id(url):
   v=parse_qs(p.query).get('v',[''])[0] if p.path=='/watch' else (p.path.split('/')[2] if re.match(r'^/(shorts|live|embed)/',p.path) and len(p.path.split('/'))>2 else '')
  else:return None
  return v if re.fullmatch(r'[A-Za-z0-9_-]{11}',v) else None
+# ELLLO public lesson transcript importer (no API key).
+from html.parser import HTMLParser
+from urllib.parse import urljoin
+ELLLO_HOSTS={'elllo.org','www.elllo.org'}
+class EllloRedirect(urllib.request.HTTPRedirectHandler):
+ def redirect_request(self,req,fp,code,msg,headers,newurl):
+  p=urlparse(newurl)
+  if p.scheme!='https' or p.hostname not in ELLLO_HOSTS or p.port not in (None,443):
+   raise ValueError('Unsupported redirect')
+  return super().redirect_request(req,fp,code,msg,headers,newurl)
+class LessonParser(HTMLParser):
+ def __init__(self):
+  super().__init__(convert_charrefs=True);self.stack=[];self.blocks=[];self.active=[];self.title='';self.in_title=False
+ def handle_starttag(self,tag,attrs):
+  a=dict(attrs); ident=(a.get('id','')+' '+a.get('class','')).lower(); tokens=re.split(r'[^a-z0-9]+',ident)
+  if tag=='title':self.in_title=True
+  if tag in ('area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'):
+   if tag=='br':
+    for b in self.active:b[1].append('\n')
+   return
+  self.stack.append(tag)
+  if tag in ('div','section','article','main','td') and (set(tokens)&{'transcript','script','tapescript'} or any(x in ident for x in ('transcript','tapescript','script-content'))):
+   self.active.append((len(self.stack),[]))
+  if tag in ('p','li','h2','h3'):
+   for b in self.active:b[1].append('\n')
+ def handle_endtag(self,tag):
+  if tag=='title':self.in_title=False
+  if tag not in self.stack:return
+  depth=len(self.stack)-self.stack[::-1].index(tag)
+  for b in self.active[:]:
+   if b[0]>=depth:self.blocks.append(''.join(b[1]));self.active.remove(b)
+  self.stack=self.stack[:depth-1]
+ def handle_data(self,data):
+  if self.in_title:self.title+=data
+  if not any(t in self.stack for t in ('script','style','nav','button')):
+   for b in self.active:b[1].append(data)
+def elllo_transcript(url):
+ p=urlparse(url.strip())
+ if p.scheme not in ('http','https') or p.hostname not in ELLLO_HOSTS or p.username or p.password or p.port not in (None,80,443):raise HTTPException(400,'ELLLO 학습 페이지 주소를 입력해 주세요.')
+ if p.path in ('','/'):raise HTTPException(400,'ELLLO 메인 화면이 아닌 개별 영어회화 학습 페이지 주소를 넣어 주세요.')
+ try:
+  req=urllib.request.Request('https://'+p.hostname+p.path+('?' + p.query if p.query else ''),headers={'User-Agent':'MoaEnglishLab/1.0','Accept':'text/html'})
+  with urllib.request.build_opener(EllloRedirect()).open(req,timeout=20) as r:
+   raw=r.read(2000001)
+   if len(raw)>2000000:raise ValueError('Page too large')
+   page=raw.decode(r.headers.get_content_charset() or 'utf-8',errors='replace')
+  parser=LessonParser();parser.feed(page);parser.close()
+  blocks=[re.sub(r'\s+',' ',x).strip() for x in parser.blocks]
+  blocks=[x for x in blocks if len(x.split())>=15]
+  if not blocks:raise HTTPException(422,'이 ELLLO 페이지에서 공개 스크립트를 찾지 못했어요. 개별 학습 페이지인지 확인하거나 직접 붙여넣어 주세요.')
+  script=max(blocks,key=len)
+  script=re.sub(r'^(?:Full\s+)?(?:Transcript|Script)\s*[:–-]?\s*','',script,flags=re.I)
+  return {'source':'ELLLO','title':parser.title.strip() or 'ELLLO English','videoId':None,'script':script,'rawCaptions':[],'captionCount':0,'language':'en','truncated':False}
+ except HTTPException:raise
+ except Exception:raise HTTPException(502,'ELLLO 페이지를 불러오지 못했어요. 주소와 사이트 접속 상태를 확인해 주세요.')
 @app.get('/api/version')
-def version():return {'version':'V43','transcript':'normalized-continuous'}
+def version():return {'version':'V66','transcript':'normalized-continuous'}
 @app.get('/')
 def index():return FileResponse(BASE/'static/index.html')
 @app.post('/api/transcript')
 def transcript(body:Video):
+ if urlparse(body.url.strip()).hostname in ELLLO_HOSTS:return elllo_transcript(body.url)
  vid=video_id(body.url)
- if not vid:raise HTTPException(400,'올바른 YouTube 영상 링크를 입력해 주세요.')
+ if not vid:raise HTTPException(400,'YouTube 영상 또는 ELLLO 개별 학습 페이지 주소를 입력해 주세요.')
  try:
   from youtube_transcript_api import YouTubeTranscriptApi
   from youtube_transcript_api._errors import TranscriptsDisabled,NoTranscriptFound,VideoUnavailable,IpBlocked,RequestBlocked
