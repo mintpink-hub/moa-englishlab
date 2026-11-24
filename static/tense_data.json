@@ -1,0 +1,100 @@
+[
+  {
+    "category": "현재진행형",
+    "sentence": "What am I doing on a Sunday night at 10:00 p.m.?",
+    "translation": "일요일 밤 10시에 나는 뭘 하고 있을까요?",
+    "answer": "am",
+    "explanation": "현재진행형 의문문: am/is/are + 주어 + 동사-ing"
+  },
+  {
+    "category": "현재진행형",
+    "sentence": "I am getting ready for bed because I'm going to wake up at 5:00 a.m. tomorrow morning.",
+    "translation": "내일 새벽 5시에 일어날 예정이라 잠자리에 들 준비를 하고 있어요.",
+    "answer": "getting",
+    "explanation": "am getting은 현재 진행 중인 준비를 나타냅니다. going to는 예정된 미래입니다."
+  },
+  {
+    "category": "현재형",
+    "sentence": "I usually wake up so excited for breakfast.",
+    "translation": "저는 보통 아침 식사가 기대돼서 신나게 일어나요.",
+    "answer": "wake",
+    "explanation": "usually와 함께 반복되는 습관을 나타내는 현재형입니다."
+  },
+  {
+    "category": "현재형",
+    "sentence": "I just love my bed.",
+    "translation": "저는 그냥 제 침대가 너무 좋아요.",
+    "answer": "love",
+    "explanation": "상태를 나타내는 love는 여기서 단순현재형으로 사용됩니다."
+  },
+  {
+    "category": "과거형",
+    "sentence": "I sat on my couch this morning, never doing that again because um I did fall asleep for 20 minutes.",
+    "translation": "오늘 아침 소파에 앉았다가 20분 동안 잠들었어요.",
+    "answer": "sat",
+    "explanation": "sat은 sit의 과거형입니다. 실제 발화에는 군더더기 표현이 포함됩니다."
+  },
+  {
+    "category": "과거형",
+    "sentence": "I woke up at 10:00 this morning.",
+    "translation": "오늘 아침 10시에 일어났어요.",
+    "answer": "woke",
+    "explanation": "woke는 wake의 과거형입니다."
+  },
+  {
+    "category": "과거형",
+    "sentence": "I slept so well.",
+    "translation": "정말 푹 잤어요.",
+    "answer": "slept",
+    "explanation": "slept는 sleep의 과거형입니다."
+  },
+  {
+    "category": "현재완료형",
+    "sentence": "I've honestly had such busy days, which has been good, but I'm going to go to bed right away.",
+    "translation": "솔직히 정말 바쁜 날들을 보냈는데, 좋은 일이었어요. 하지만 지금 바로 잘 거예요.",
+    "answer": "had",
+    "explanation": "have had는 현재완료형이며, 과거부터 현재까지 이어지는 경험을 표현합니다."
+  },
+  {
+    "category": "현재완료형",
+    "sentence": "I've already gotten so much done, which is like the best feeling in the world.",
+    "translation": "벌써 많은 일을 끝냈는데, 세상에서 가장 좋은 기분 같아요.",
+    "answer": "gotten",
+    "explanation": "have gotten은 현재완료형으로 지금까지 이룬 결과를 강조합니다."
+  },
+  {
+    "category": "미래 표현",
+    "sentence": "I'm going to grab my stuff, go to the coffee shop to work because [music] we all know I'm 20 times more productive when I'm out.",
+    "translation": "물건을 챙겨 카페에 일하러 갈 거예요.",
+    "answer": "going",
+    "explanation": "be going to + 동사원형은 의도하거나 계획한 미래를 나타냅니다."
+  },
+  {
+    "category": "미래 표현",
+    "sentence": "You will see me in a bad mood in probably a a second.",
+    "translation": "아마 잠시 후 제가 기분이 안 좋은 모습을 보게 될 거예요.",
+    "answer": "will",
+    "explanation": "will + 동사원형은 미래 예측에 쓰입니다. 원문에는 a가 반복됩니다."
+  },
+  {
+    "category": "가정법 과거",
+    "sentence": "If I didn't have this this morning, where would be the light?",
+    "translation": "오늘 아침 이게 없었다면 무슨 낙으로 버텼을까요?",
+    "answer": "didn't",
+    "explanation": "if + 과거형, would + 동사원형으로 현재의 가상 상황을 표현합니다. 원문은 구어체입니다."
+  },
+  {
+    "category": "과거진행형",
+    "sentence": "I was feeling pretty productive though.",
+    "translation": "그래도 꽤 생산적으로 일하고 있다는 느낌이었어요.",
+    "answer": "feeling",
+    "explanation": "was feeling은 과거 특정 시점에 진행 중이던 상태를 나타냅니다."
+  },
+  {
+    "category": "현재완료형",
+    "sentence": "I've never been so happy to be in my bed.",
+    "translation": "침대에 누워 이렇게 행복했던 적이 없어요.",
+    "answer": "been",
+    "explanation": "have never been은 지금까지의 경험을 강조하는 현재완료형입니다."
+  }
+]
