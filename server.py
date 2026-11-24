@@ -73,8 +73,53 @@ def elllo_transcript(url):
   return {'source':'ELLLO','title':parser.title.strip() or 'ELLLO English','videoId':None,'script':script,'rawCaptions':[],'captionCount':0,'language':'en','truncated':False}
  except HTTPException:raise
  except Exception:raise HTTPException(502,'ELLLO 페이지를 불러오지 못했어요. 주소와 사이트 접속 상태를 확인해 주세요.')
+# Supadata native captions only; no AI generation.
+from urllib.parse import urlencode
+from urllib.error import HTTPError
+from functools import lru_cache
+import time
+
+@lru_cache(maxsize=128)
+def supadata_transcript(vid):
+ key=os.getenv('SUPADATA_API_KEY','').strip()
+ if not key:raise HTTPException(503,'Render에 SUPADATA_API_KEY를 등록해 주세요.')
+ base='https://api.supadata.ai/v1/transcript'
+ def request(url):
+  req=urllib.request.Request(url,headers={'x-api-key':key,'Accept':'application/json'})
+  try:
+   with urllib.request.urlopen(req,timeout=20) as r:
+    if r.status==206:raise HTTPException(422,'이 영상에는 기존 자막이 없어요.')
+    return json.load(r)
+  except HTTPError as e:
+   messages={401:'Supadata API 키를 확인해 주세요.',403:'Supadata API 접근 권한을 확인해 주세요.',402:'Supadata 사용량 또는 요금제 한도를 확인해 주세요.',429:'Supadata 요청 한도에 도달했어요.',404:'영상 또는 자막을 찾을 수 없어요.'}
+   raise HTTPException(503 if e.code in (401,402,403,429) else 422 if e.code==404 else 502,messages.get(e.code,'Supadata 자막 요청에 실패했어요.')) from None
+  except HTTPException:raise
+  except Exception:raise HTTPException(502,'Supadata 서버에 연결하지 못했어요.') from None
+ data=request(base+'?'+urlencode({'url':'https://www.youtube.com/watch?v='+vid,'lang':'en','text':'false','mode':'native'}))
+ if data.get('jobId'):
+  job=str(data['jobId'])
+  if not re.fullmatch(r'[A-Za-z0-9_-]+',job):raise HTTPException(502,'잘못된 자막 작업 응답입니다.')
+  for _ in range(15):
+   time.sleep(1);data=request(base+'/'+job)
+   if data.get('status')=='completed':break
+   if data.get('status')=='failed':raise HTTPException(422,'자막 작업에 실패했어요.')
+  else:raise HTTPException(504,'자막 처리 시간이 초과됐어요.')
+  data=data.get('result') or data
+ lang=str(data.get('lang') or '')
+ if not lang.lower().startswith('en'):raise HTTPException(422,'이 영상에서 영어 자막을 찾지 못했어요.')
+ content=data.get('content');items=[]
+ if isinstance(content,list):
+  for x in content:
+   text=str(x.get('text') or '')
+   if text.strip():items.append({'text':text,'start':float(x.get('offset',0))/1000,'duration':float(x.get('duration',0))/1000})
+  script=' '.join(re.sub(r'\s+',' ',x['text']).strip() for x in items if not x['text'].lstrip().startswith('['))
+ elif isinstance(content,str):script=content.strip()
+ else:script=''
+ if not script:raise HTTPException(422,'가져올 수 있는 영어 자막이 없어요.')
+ return {'source':'Supadata','videoId':vid,'script':script,'rawCaptions':items,'truncated':False,'captionCount':len(items),'language':lang}
+
 @app.get('/api/version')
-def version():return {'version':'V66','transcript':'normalized-continuous'}
+def version():return {'version':'V67','transcript':'normalized-continuous'}
 @app.get('/')
 def index():return FileResponse(BASE/'static/index.html')
 @app.post('/api/transcript')
@@ -82,6 +127,7 @@ def transcript(body:Video):
  if urlparse(body.url.strip()).hostname in ELLLO_HOSTS:return elllo_transcript(body.url)
  vid=video_id(body.url)
  if not vid:raise HTTPException(400,'YouTube 영상 또는 ELLLO 개별 학습 페이지 주소를 입력해 주세요.')
+ if os.getenv('SUPADATA_API_KEY','').strip():return supadata_transcript(vid)
  try:
   from youtube_transcript_api import YouTubeTranscriptApi
   from youtube_transcript_api._errors import TranscriptsDisabled,NoTranscriptFound,VideoUnavailable,IpBlocked,RequestBlocked
