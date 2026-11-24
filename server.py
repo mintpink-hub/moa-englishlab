@@ -1,7 +1,7 @@
 import os,re,json,urllib.request
 from pathlib import Path
 from urllib.parse import urlparse,parse_qs
-from fastapi import FastAPI,HTTPException
+from fastapi import FastAPI,HTTPException,Header,Depends
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel,Field
@@ -9,6 +9,29 @@ from pydantic import BaseModel,Field
 BASE=Path(__file__).parent
 app=FastAPI(title='Olive English Lab V14')
 app.mount('/static',StaticFiles(directory=BASE/'static'),name='static')
+
+SUPABASE_URL = 'https://wkbmyyhcfbhqegbsloka.supabase.co'
+SUPABASE_KEY = 'sb_publishable_9OiWxVImzcmBY9gdNn1g8Q_GA2xiF_k'
+ALLOWED_EMAIL = 'min0tpink@gmail.com'
+
+def require_owner(authorization: str = Header(default='')):
+ if not authorization.startswith('Bearer ') or len(authorization)>16000:
+  raise HTTPException(401,'구글 로그인이 필요해요.')
+ req=urllib.request.Request(SUPABASE_URL+'/auth/v1/user',headers={'apikey':SUPABASE_KEY,'Authorization':authorization})
+ try:
+  with urllib.request.urlopen(req,timeout=10) as r:user=json.load(r)
+ except urllib.error.HTTPError as e:
+  raise HTTPException(401 if e.code in (400,401,403) else 503,'로그인 인증을 확인하지 못했어요.') from None
+ except Exception:
+  raise HTTPException(503,'로그인 서버에 연결하지 못했어요.') from None
+ if user.get('email','').lower()!=ALLOWED_EMAIL or not user.get('email_confirmed_at') or user.get('app_metadata',{}).get('provider')!='google':
+  raise HTTPException(403,'허용된 구글 계정만 사용할 수 있어요.')
+ return user
+
+@app.get('/api/auth-check')
+def auth_check(user=Depends(require_owner)):
+ return {'ok':True}
+
 class Video(BaseModel):url:str=Field(max_length=500)
 class Translation(BaseModel):sentences:list[str]=Field(min_length=1,max_length=1);context_before:str='';context_after:str=''
 def video_id(url):
@@ -119,11 +142,11 @@ def supadata_transcript(vid):
  return {'source':'Supadata','videoId':vid,'script':script,'rawCaptions':items,'truncated':False,'captionCount':len(items),'language':lang}
 
 @app.get('/api/version')
-def version():return {'version':'V67','transcript':'normalized-continuous'}
+def version():return {'version':'V69','transcript':'normalized-continuous'}
 @app.get('/')
-def index():return FileResponse(BASE/'static/index.html')
+def index():return FileResponse(BASE/'static/index.html',headers={'Cache-Control':'no-store, max-age=0'})
 @app.post('/api/transcript')
-def transcript(body:Video):
+def transcript(body:Video, user=Depends(require_owner)):
  if urlparse(body.url.strip()).hostname in ELLLO_HOSTS:return elllo_transcript(body.url)
  vid=video_id(body.url)
  if not vid:raise HTTPException(400,'YouTube 영상 또는 ELLLO 개별 학습 페이지 주소를 입력해 주세요.')
@@ -205,7 +228,7 @@ def translation_status():
  provider=os.getenv('TRANSLATION_PROVIDER','manual').lower()
  return {'provider':provider,'configured':bool(os.getenv('GOOGLE_CLOUD_TRANSLATE_API_KEY')) if provider=='google' else True,'notice':'Google Cloud API는 별도 과금될 수 있어요.' if provider=='google' else '기본값은 수동 Google 번역 확인 + 로컬 저장입니다. 자동 번역 API를 사용하지 않습니다.'}
 @app.post('/api/translate')
-def translate(body:Translation):
+def translate(body:Translation, user=Depends(require_owner)):
  text=body.sentences[0].strip()[:1000]
  if not text:raise HTTPException(400,'문장을 입력해 주세요.')
  provider=os.getenv('TRANSLATION_PROVIDER','manual').lower()
