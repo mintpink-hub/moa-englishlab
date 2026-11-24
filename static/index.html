@@ -524,15 +524,15 @@ try {
  const {createClient}=await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
  const client=createClient('https://wkbmyyhcfbhqegbsloka.supabase.co','sb_publishable_9OiWxVImzcmBY9gdNn1g8Q_GA2xiF_k',{auth:{storageKey:'moa-english-auth-v68',flowType:'pkce'}});
  const lock=()=>document.body.classList.remove('moa-authorized');
- let generation=0;
+ let generation=0; let authMessage='';
  async function verify(session){
   const current=++generation;lock();
-  if(!session){status.textContent='허용된 구글 계정으로 로그인해 주세요.';return;}
-  try{const r=await fetch('/api/auth-check',{headers:{Authorization:'Bearer '+session.access_token},cache:'no-store'});if(current!==generation)return;if(!r.ok){status.textContent=r.status===403?'허용되지 않은 계정입니다. 다른 계정으로 로그인해 주세요.':'로그인 인증에 실패했어요. 다시 로그인해 주세요.';await client.auth.signOut({scope:'local'});return;}document.body.classList.add('moa-authorized');status.textContent='';}catch(e){status.textContent='인증 서버 연결에 실패했어요. 다시 로그인해 주세요.';}
+  if(!session){status.textContent=authMessage||'허용된 구글 계정으로 로그인해 주세요.';login.disabled=false;return;}
+  try{const r=await fetch('/api/auth-check',{headers:{Authorization:'Bearer '+session.access_token},cache:'no-store'});if(current!==generation)return;if(!r.ok){status.textContent=authMessage=r.status===403?'허용되지 않은 계정입니다. 다른 계정으로 로그인해 주세요.':'로그인 인증에 실패했어요. 다시 로그인해 주세요.';if(r.status===401||r.status===403)await client.auth.signOut({scope:'local'});login.disabled=false;return;}document.body.classList.add('moa-authorized');status.textContent='';}catch(e){status.textContent='인증 서버 연결에 실패했어요. 다시 로그인해 주세요.';}
  }
  window.moaAccessToken=async()=>{const {data:{session}}=await client.auth.getSession();if(!session||!document.body.classList.contains('moa-authorized'))throw Error('로그인이 필요해요.');return session.access_token;};
  login.disabled=false;
- login.onclick=async()=>{login.disabled=true;const {error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+'/',queryParams:{prompt:'select_account'}}});if(error){status.textContent=error.message;login.disabled=false;}};
+ login.onclick=async()=>{authMessage='';login.disabled=true;const {error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+'/',queryParams:{prompt:'select_account'}}});if(error){status.textContent=error.message;login.disabled=false;}};
  document.getElementById('moa-logout').onclick=async()=>{lock();await client.auth.signOut({scope:'local'});location.reload();};
  client.auth.onAuthStateChange((event,session)=>{setTimeout(()=>verify(session),0);});
 }catch(e){status.textContent='로그인 기능을 불러오지 못했어요. 새로고침해 주세요.';}
